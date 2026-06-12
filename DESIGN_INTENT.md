@@ -76,10 +76,15 @@ These are **separate story elements with different jobs**:
   portions always hidden in atmosphere, never a clean technical view.
 - **The signal changed. The light appeared recently.** It is the only
   functioning machine left in the world — the brightest object in the scene.
-- Lamp behaviour: long red holds (8–32s), rare brief green (1.5–5.5s),
-  electrical flicker with occasional gutters. Red is brighter than green
-  (danger). At scroll >96.5%, a scripted finale: the signal goes green and
-  holds — granting permission to no one.
+- Lamp behaviour: long red holds (8–32s), rare brief green (1.5–5.5s).
+  Red is brighter than green (danger). At scroll >96.5%, a scripted
+  finale: the signal goes green and holds — granting permission to no one.
+- **Flicker rule:** the lamp lights the whole corridor, so modulating it
+  modulates the frame. Scene illumination (the point lights) may only
+  *breathe*: ≤±2.5%, ≤~0.1 Hz, no gutters. Character lives in the glow
+  elements only (lens, spectacle, sprites) — slow, shallow, smooth.
+  Fast/deep light modulation reads as full-frame flicker, worst on
+  120 Hz displays. (Shipped three times; cut three times. Don't again.)
 
 **The cathedral dominates the landscape. The signal dominates the narrative.**
 
@@ -130,9 +135,10 @@ Do not simply increase FogExp2 density. The atmosphere is layered:
 4. **Ground mist** — low drifting sheets over the corridor.
 5. **Dust** — sparse suspended motes near the camera.
 6. NO full-frame light passes (GodRays was tried and cut: a radial
-   resample of a flickering source flashes the whole frame). Light-in-air
-   is carried by the lamp's layered sprites; any lamp flicker must be a
-   continuous function — never a frame-to-frame step in a bright source.
+   resample of a varying source flashes the whole frame). Light-in-air
+   is carried by the lamp's layered sprites. See the Flicker rule in §3:
+   scene lights breathe (≤±2.5%, slow, no gutters); only glow elements
+   carry character, and always as continuous, shallow functions.
 7. The lamp's glow sprites are **fog-exempt** so the light pierces haze long
    before its structure resolves — the light often appears suspended in fog.
 

@@ -11,7 +11,9 @@
       "Bash(echo \"---LINT EXIT: $?\")",
       "mcp__Claude_Preview__preview_start",
       "WebFetch(domain:www.behance.net)",
-      "WebFetch(domain:snayss.medium.com)"
+      "WebFetch(domain:snayss.medium.com)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Fix full-frame flicker: scene lights breathe, only glow carries character *)"
     ]
   }
 }

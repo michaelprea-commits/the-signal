@@ -111,36 +111,40 @@ export function Signal() {
     _col.current.lerpColors(COL_RED, COL_GREEN, b)
     const baseIntensity = THREE.MathUtils.lerp(30, 20, b)  // red brighter — danger, urgency
 
-    // Electrical flicker — aged equipment, nobody maintains it
-    let f = 0.90 + 0.05 * Math.sin(time * 3.3) + 0.05 * Math.sin(time * 8.1 + 1.7)
-    // Smooth gutter — never a frame-to-frame step in the brightest source
-    const g = THREE.MathUtils.smoothstep(Math.sin(time * 0.41 + 0.5), 0.985, 0.998)
-    f *= 1.0 - 0.55 * g
+    // The lamp breathes — barely. Fast or deep modulation of the scene's
+    // dominant light source reads as full-frame flicker (painfully crisp
+    // on 120 Hz displays), so scene ILLUMINATION stays near-stable and
+    // only the visible glow carries a slow, gentle character.
+    const breath = 0.975 + 0.025 * Math.sin(time * 0.6)
+
+    // Glow character: slow wobble + a rare, shallow, smooth gutter
+    const gut = THREE.MathUtils.smoothstep(Math.sin(time * 0.41 + 0.5), 0.985, 0.998)
+    const glow = (0.94 + 0.06 * Math.sin(time * 0.9 + 1.7)) * (1.0 - 0.15 * gut)
 
     if (lampRef.current) {
-      lampRef.current.intensity = baseIntensity * f
+      lampRef.current.intensity = baseIntensity * breath
       lampRef.current.color.copy(_col.current)
     }
     if (fillRef.current) {
-      fillRef.current.intensity = baseIntensity * 0.3 * f
+      fillRef.current.intensity = baseIntensity * 0.3 * breath
       fillRef.current.color.copy(_col.current)
     }
     if (lensRef.current) {
-      lensRef.current.material.emissiveIntensity = 14 * f
+      lensRef.current.material.emissiveIntensity = 14 * glow
       lensRef.current.material.color.copy(_col.current)
       lensRef.current.material.emissive.copy(_col.current)
     }
     if (spectacleRef.current) {
-      spectacleRef.current.material.emissiveIntensity = 5 * f
+      spectacleRef.current.material.emissiveIntensity = 5 * glow
       spectacleRef.current.material.color.copy(_col.current)
       spectacleRef.current.material.emissive.copy(_col.current)
     }
     if (coreRef.current) {
-      coreRef.current.material.opacity = 0.85 * f
+      coreRef.current.material.opacity = 0.85 * glow
       coreRef.current.material.color.copy(_col.current)
     }
     if (haloRef.current) {
-      haloRef.current.material.opacity = 0.2 * (0.6 + 0.4 * f)
+      haloRef.current.material.opacity = 0.2 * (0.7 + 0.3 * glow)
       haloRef.current.material.color.copy(_col.current)
     }
     if (airRef.current) {
