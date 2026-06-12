@@ -16,14 +16,19 @@ const CA_OFFSET = new Vector2(0.00035, 0.0002)
 // do its narrative job. Restraint won.
 export function PostFX() {
   return (
-    <EffectComposer multisampling={0}>
+    // MSAA matters here: without it, the few-pixel-wide lens sphere changes
+    // rasterized coverage every frame as the idle camera drifts sub-pixel,
+    // and Bloom amplifies each jump into an arhythmic strobe.
+    <EffectComposer multisampling={8}>
       {/* Bloom — the dominant effect. With the scene this dark, even a moderate
-          emissive object halos dramatically. The large radius creates atmospheric
-          scatter — light appears to be diffusing through fog. */}
+          emissive object halos dramatically. Raised luminanceSmoothing softens
+          the threshold knee so sources near it fade in/out instead of popping.
+          (mipmapBlur was tried for extra stability but needs live tuning —
+          its intensity scale is entirely different; revisit interactively.) */}
       <Bloom
         intensity={3.0}
         luminanceThreshold={0.2}
-        luminanceSmoothing={0.7}
+        luminanceSmoothing={0.85}
         radius={1.0}
         blendFunction={BlendFunction.SCREEN}
       />

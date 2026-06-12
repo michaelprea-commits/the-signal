@@ -130,12 +130,14 @@ export function Signal() {
       fillRef.current.color.copy(_col.current)
     }
     if (lensRef.current) {
-      lensRef.current.material.emissiveIntensity = 14 * glow
+      // 8 not 14: the sprites carry the visible glow; the lens only feeds
+      // bloom, and an over-hot sub-pixel source strobes under any sampling
+      lensRef.current.material.emissiveIntensity = 8 * glow
       lensRef.current.material.color.copy(_col.current)
       lensRef.current.material.emissive.copy(_col.current)
     }
     if (spectacleRef.current) {
-      spectacleRef.current.material.emissiveIntensity = 5 * glow
+      spectacleRef.current.material.emissiveIntensity = 3 * glow
       spectacleRef.current.material.color.copy(_col.current)
       spectacleRef.current.material.emissive.copy(_col.current)
     }

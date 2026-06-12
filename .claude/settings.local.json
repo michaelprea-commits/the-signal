@@ -13,7 +13,8 @@
       "WebFetch(domain:www.behance.net)",
       "WebFetch(domain:snayss.medium.com)",
       "Bash(git add *)",
-      "Bash(git commit -m 'Fix full-frame flicker: scene lights breathe, only glow carries character *)"
+      "Bash(git commit -m 'Fix full-frame flicker: scene lights breathe, only glow carries character *)",
+      "Bash(git commit -m 'Fix arhythmic strobe at rest: MSAA, cooler bloom sources, stabler dust *)"
     ]
   }
 }

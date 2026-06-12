@@ -234,11 +234,11 @@ function Dust() {
   return (
     <points ref={ref} geometry={geometry}>
       <pointsMaterial
-        size={0.035}
+        size={0.06}
         sizeAttenuation
         color="#8a7050"
         transparent
-        opacity={0.30}
+        opacity={0.18}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />
