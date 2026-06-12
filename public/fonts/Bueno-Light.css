@@ -1,0 +1,9 @@
+/* Webfont: Bueno-Light */@font-face {
+    font-family: 'BuenoLight';
+    src: url('Bueno-Light.woff2') format('woff2'), /* Modern Browsers */
+         url('Bueno-Light.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

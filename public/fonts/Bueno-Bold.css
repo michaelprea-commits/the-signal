@@ -1,0 +1,9 @@
+/* Webfont: Bueno-Bold */@font-face {
+    font-family: 'Bueno';
+    src: url('Bueno-Bold.woff2') format('woff2'), /* Modern Browsers */
+         url('Bueno-Bold.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+}
+

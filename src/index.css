@@ -1,0 +1,304 @@
+/* ─── Fonts ──────────────────────────────────────────────────────────────────── */
+/* Bueno — hairline throughout. The title's restraint IS the system: thin
+   strokes, wide tracking, darkness around them. Hierarchy comes from
+   SIZE, not weight; the one weight accent in the piece is Light 300 on
+   the final line. No Bold, no Black — an archive, not a poster. */
+@font-face {
+  font-family: 'Bueno';
+  src: url('/Fonts/Bueno-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bueno';
+  src: url('/Fonts/Bueno-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bueno';
+  src: url('/Fonts/Bueno-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ─── Scroll structure ───────────────────────────────────────────────────────── */
+html, body {
+  width: 100%;
+  background: #02010a;
+  overflow-x: hidden;
+  /* No scrollbar over the frame — the journey is directed, not browsed */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+#root {
+  width: 100%;
+}
+
+/* Fixed canvas — always fills viewport, never scrolls */
+.canvas-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Fixed text layer — sits above canvas, never intercepts pointer events */
+.text-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Invisible spacer — the only thing creating document scroll height.
+   900vh ≈ 9 viewport-heights: slow, deliberate, with long silences
+   between beats. The journey should feel inevitable, not brisk. */
+.scroll-driver {
+  height: 900vh;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* ─── Title ──────────────────────────────────────────────────────────────────── */
+/* Archive frame: a hairline catalogue label above a thin, widely-tracked
+   masthead. Film-title grammar — quiet authority, no decoration. */
+.site-title {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.site-title__kicker {
+  font-family: 'Bueno', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.55rem, 0.8vw, 0.7rem);
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  text-transform: uppercase;
+  color: rgba(200, 180, 140, 0.45);
+}
+
+.site-title h1 {
+  font-family: 'Bueno', 'EB Garamond', Georgia, serif;
+  font-weight: 200;
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  letter-spacing: 0.55em;
+  text-indent: 0.55em; /* recenters tracked text */
+  text-transform: uppercase;
+  color: rgba(236, 224, 198, 0.92);
+}
+
+.site-title__rule {
+  display: block;
+  width: 3.2rem;
+  height: 1px;
+  background: rgba(232, 221, 196, 0.25);
+}
+
+/* ─── Narrative typography ───────────────────────────────────────────────────── */
+/* Three voices, composed differently per beat:
+     kicker   — Regular 400, tiny, widely tracked: the archival date stamp
+     dominant — Black 900, condensed display doing what it was drawn for
+     quiet    — ExtraLight 200, the soft fragment, hazed toward the fog
+   No element shares treatment, position, or timing with its siblings. */
+.text-card {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Card one — lower-left field, left rag */
+.text-card--one { left: 9vw; bottom: 26vh; }
+.text-card--one .text-card__quiet { padding-left: clamp(2rem, 7vw, 6rem); }
+
+/* Card two — upper-right third (the rails own the lower frame at this
+   beat; the type vacates the scene's subject), right rag */
+.text-card--two { right: 9vw; top: 13vh; text-align: right; }
+.text-card--two .text-card__quiet  { padding-right: clamp(1.6rem, 5vw, 4.5rem); }
+.text-card--two .text-card__kicker { text-indent: 0.55em; }
+
+/* Kicker — the archival date stamp */
+.text-card__kicker {
+  display: block;
+  font-family: 'Bueno', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.55rem, 0.8vw, 0.7rem);
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: rgba(200, 180, 140, 0.5);
+  margin-bottom: 1.4em;
+  opacity: 0;
+}
+
+/* Dominant — the title's hairline voice at display scale. Quiet
+   confidence: thin strokes, wide tracking, room to breathe. */
+.text-card__dominant {
+  font-family: 'Bueno', 'EB Garamond', Georgia, serif;
+  font-weight: 200;
+  font-size: clamp(1.7rem, 3.5vw, 4.2rem);
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(238, 228, 202, 0.92);
+  text-shadow: 0 2px 24px rgba(2, 1, 10, 0.7);
+}
+
+/* The reveal mask — GSAP sweeps the clip while the inner line rises.
+   GSAP owns ALL transforms here: a CSS resting offset gets parsed into a
+   pixel `y` in GSAP's cache and silently layers under every yPercent
+   tween. Pre-reveal, the container's opacity: 0 hides everything. */
+.text-card .line {
+  display: block;
+  padding-bottom: 0.08em; /* descenders stay inside the clip */
+}
+.text-card .line__inner {
+  display: block;
+  transform-origin: 0% 100%;
+  will-change: transform;
+}
+
+/* Quiet — the soft fragment, condensing out of the fog.
+   ExtraLight needs air between letters to stay legible at night. */
+.text-card__quiet {
+  display: block;
+  font-family: 'Bueno', 'EB Garamond', Georgia, serif;
+  font-weight: 200;
+  font-size: clamp(1.3rem, 2.7vw, 3.3rem);
+  line-height: 1.1;
+  letter-spacing: 0.085em;
+  color: rgba(216, 208, 198, 0.85);
+  margin-top: 0.55em;
+  opacity: 0;
+  will-change: opacity, filter;
+}
+
+/* Final — central axis (the one sanctioned centre), asymmetric internals.
+   The silence lives inside the lockup: dominant lands, a held beat,
+   then "for centuries." condenses alone. */
+.text-card--final {
+  left: 50%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  width: 94vw;
+  text-align: center;
+}
+.text-card--final .text-card__kicker {
+  text-indent: 0.55em;
+  margin-bottom: 2em;
+}
+.text-card--final .text-card__dominant {
+  /* The one weight accent in the piece: a half-step up to Light 300,
+     a step up in scale. Reserved for the payload. */
+  font-weight: 300;
+  font-size: clamp(2rem, 4.4vw, 5.4rem);
+  letter-spacing: 0.14em;
+  /* No shadow here — the line sits against the lamp's glow, and a dark
+     halo reads as a mask. The words stand in the light unprotected. */
+  text-shadow: none;
+}
+.text-card--final .text-card__quiet {
+  font-size: clamp(1.5rem, 3vw, 3.8rem);
+  margin-top: clamp(1.2rem, 3.5vh, 2.6rem);
+  padding: 0;
+  color: rgba(224, 214, 200, 0.9);
+}
+
+/* Scroll hint — a thin falling line, not a UI label */
+.scroll-hint {
+  position: fixed;
+  bottom: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.scroll-hint__line {
+  display: block;
+  width: 1px;
+  height: 38px;
+  background: linear-gradient(
+    to bottom,
+    rgba(200, 180, 140, 0) 0%,
+    rgba(200, 180, 140, 0.45) 100%
+  );
+}
+
+.scroll-hint span:not(.scroll-hint__line) {
+  display: block;
+  font-family: 'Bueno', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.5rem, 0.8vw, 0.65rem);
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  text-transform: lowercase;
+  color: rgba(200, 180, 140, 0.35);
+}
+
+/* ─── Intro veil ─────────────────────────────────────────────────────────────── */
+/* The experience opens from held black, not from a loading frame. */
+.intro-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #02010a;
+  pointer-events: none;
+  animation: intro-veil-out 2.6s ease 0.5s forwards;
+}
+
+@keyframes intro-veil-out {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* ─── Sound toggle ───────────────────────────────────────────────────────────── */
+.sound-toggle {
+  position: fixed;
+  right: 3vw;
+  bottom: 4vh;
+  z-index: 20;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Bueno', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.5rem, 0.8vw, 0.65rem);
+  letter-spacing: 0.4em;
+  text-transform: lowercase;
+  color: rgba(200, 180, 140, 0.30);
+  padding: 0.6em 0.2em;
+  transition: color 0.4s ease;
+}
+
+.sound-toggle:hover,
+.sound-toggle[data-on='true'] {
+  color: rgba(232, 221, 196, 0.85);
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .text-card--one { left: 7vw; bottom: 24vh; }
+  .text-card--two { right: 7vw; top: 11vh; }
+}

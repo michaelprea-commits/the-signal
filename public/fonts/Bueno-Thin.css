@@ -1,0 +1,9 @@
+/* Webfont: Bueno-Thin */@font-face {
+    font-family: 'BuenoThin';
+    src: url('Bueno-Thin.woff2') format('woff2'), /* Modern Browsers */
+         url('Bueno-Thin.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

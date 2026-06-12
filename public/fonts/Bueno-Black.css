@@ -1,0 +1,9 @@
+/* Webfont: Bueno-Black */@font-face {
+    font-family: 'BuenoBlack';
+    src: url('Bueno-Black.woff2') format('woff2'), /* Modern Browsers */
+         url('Bueno-Black.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

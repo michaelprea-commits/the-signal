@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(npm list *)",
+      "Bash(pkill -f \"vite\")",
+      "Read(//tmp/**)",
+      "Bash(node *)",
+      "Bash(echo \"---LINT EXIT: $?\")",
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:www.behance.net)",
+      "WebFetch(domain:snayss.medium.com)"
+    ]
+  }
+}

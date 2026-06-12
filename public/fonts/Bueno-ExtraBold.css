@@ -1,0 +1,9 @@
+/* Webfont: Bueno-ExtraBold */@font-face {
+    font-family: 'BuenoExtBd';
+    src: url('Bueno-ExtraBold.woff2') format('woff2'), /* Modern Browsers */
+         url('Bueno-ExtraBold.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
