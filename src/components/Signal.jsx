@@ -130,9 +130,10 @@ export function Signal() {
       fillRef.current.color.copy(_col.current)
     }
     if (lensRef.current) {
-      // 8 not 14: the sprites carry the visible glow; the lens only feeds
-      // bloom, and an over-hot sub-pixel source strobes under any sampling
-      lensRef.current.material.emissiveIntensity = 8 * glow
+      // Lens feeds bloom only — sprites carry the visible glow.
+      // Radius 0.22 (was 0.10) gives stable pixel coverage so camera drift
+      // doesn't cause frame-to-frame HDR spikes into the bloom pass.
+      lensRef.current.material.emissiveIntensity = 4 * glow
       lensRef.current.material.color.copy(_col.current)
       lensRef.current.material.emissive.copy(_col.current)
     }
@@ -241,7 +242,7 @@ export function Signal() {
               are dark (imperceptible) not bright. useFrame owns the value
               every frame; it was the JSX-declared 14 that caused the flash. */}
           <mesh ref={lensRef}>
-            <sphereGeometry args={[0.10, 10, 10]} />
+            <sphereGeometry args={[0.22, 16, 12]} />
             <meshStandardMaterial
               color={COL_RED}
               emissive={COL_RED}

@@ -1,6 +1,5 @@
 import {
   EffectComposer,
-  Bloom,
   ChromaticAberration,
   HueSaturation,
   BrightnessContrast,
@@ -11,27 +10,25 @@ import { Vector2 } from 'three'
 
 const CA_OFFSET = new Vector2(0.00035, 0.0002)
 
-// No GodRays pass: a full-screen radial resample of a flickering source
-// produced frame-wide light flashes, and the halo/air-glow sprites already
-// do its narrative job. Restraint won.
+// No GodRays: full-screen radial resample of a flickering source = frame-wide
+// light flashes. Halo/air-glow sprites already do its narrative job.
+//
+// No library Bloom: postprocessing's Bloom allocates its own mip-chain render
+// targets. On Apple Silicon (Metal/TBDR), those targets use MTLLoadActionDontCare
+// — tile memory is undefined, not zero. On frames where any tile escapes the blur
+// kernel, the undefined value (often white) propagates to full-screen white.
+// Confirmed: strobe persists even at luminanceThreshold=10 (nothing blooming),
+// proving the bug is in the pass infrastructure, not scene content.
+//
+// No custom GlowEffect: discrete sampling in a 200:1 contrast scene (lamp
+// emissiveIntensity=4 vs background ~0.02) produces cursor-like artifacts at
+// the glow boundary regardless of sample count or radius. Eliminating this
+// requires ~450 samples to bring individual transitions below the JND —
+// not practical. The halo (scale 5.5) and air-glow (scale 12) sprites already
+// provide smooth, artifact-free atmospheric scatter from the lamp.
 export function PostFX() {
   return (
-    // MSAA matters here: without it, the few-pixel-wide lens sphere changes
-    // rasterized coverage every frame as the idle camera drifts sub-pixel,
-    // and Bloom amplifies each jump into an arhythmic strobe.
-    <EffectComposer multisampling={8}>
-      {/* Bloom — the dominant effect. With the scene this dark, even a moderate
-          emissive object halos dramatically. Raised luminanceSmoothing softens
-          the threshold knee so sources near it fade in/out instead of popping.
-          (mipmapBlur was tried for extra stability but needs live tuning —
-          its intensity scale is entirely different; revisit interactively.) */}
-      <Bloom
-        intensity={3.0}
-        luminanceThreshold={0.2}
-        luminanceSmoothing={0.85}
-        radius={1.0}
-        blendFunction={BlendFunction.SCREEN}
-      />
+    <EffectComposer multisampling={0}>
 
       {/* Grade: gently desaturated, slightly crushed — closer to print than
           to screen. Keeps the lamp colour the only saturated thing alive. */}
