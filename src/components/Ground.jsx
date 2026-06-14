@@ -23,14 +23,18 @@ export function Ground() {
       const medium = Math.sin(x * 0.080 - y * 0.045 + 1.0) * Math.cos(y * 0.06) * 1.6
       const fine   = Math.sin(x * 0.160 + y * 0.110 + 2.3)                       * 0.55
 
-      // The drift — one low ridge of sand blown across the corridor at
-      // z≈38. The walk climbs it and the rails dive into it, but it stays
-      // BELOW the lamp's sightline for the whole approach: the light is
-      // never occluded by terrain (a light glitching through a hill reads
-      // as a bug, not a mystery — the mist banks do the hiding instead).
-      const dz = (zWorld - 38) / 5.5
+      // The drift — a sand ridge blown across the corridor at z≈38.
+      // Height 2.4: enough to occlude the signal lamp's sight-line from
+      // t≈0.17 (z≈56) through t≈0.37 (camera crests at y=3.00, 0.6m
+      // above ridge top). Peak mystery falls at 25–35% scroll.
+      // The air-glow sprite (scale 12) protrudes above the ridge silhouette
+      // in screen space, producing the "city behind a hill" atmospheric
+      // linger before and after full occlusion.
+      // Signal point lights are faded in Signal.jsx during this window to
+      // prevent illumination bleeding through the terrain.
+      const dz = (zWorld - 38) / 5.0
       const dx = x / 16
-      const drift = 1.6 * Math.exp(-(dz * dz)) * Math.exp(-(dx * dx))
+      const drift = 2.4 * Math.exp(-(dz * dz)) * Math.exp(-(dx * dx))
 
       pos.setZ(i, (large + medium + fine) * duneBlend + drift)
     }

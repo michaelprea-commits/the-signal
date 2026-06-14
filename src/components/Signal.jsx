@@ -210,12 +210,22 @@ export function Signal() {
     const gut    = THREE.MathUtils.smoothstep(Math.sin(time * 0.41 + 0.5), 0.985, 0.998)
     const glow   = (0.94 + 0.06 * Math.sin(time * 0.9 + 1.7)) * (1.0 - 0.15 * gut)
 
+    // Occlude scene lights while the signal is behind the sand ridge (z≈38).
+    // Without this, point lights bleed through the terrain to the camera side.
+    // Sprites are naturally occluded by depth testing; only lights need fading.
+    // Fade out: t=0.17→0.22 (lamp disappears behind ridge)
+    // Fade in:  t=0.35→0.40 (camera crests, lamp reappears)
+    const st      = scrollState.smooth
+    const intoRidge  = THREE.MathUtils.smoothstep(0.17, 0.22, st)
+    const outOfRidge = THREE.MathUtils.smoothstep(0.35, 0.40, st)
+    const lightMult  = 1 - intoRidge * (1 - outOfRidge)
+
     if (lampRef.current) {
-      lampRef.current.intensity = baseIntensity * breath
+      lampRef.current.intensity = baseIntensity * breath * lightMult
       lampRef.current.color.copy(_col.current)
     }
     if (fillRef.current) {
-      fillRef.current.intensity = baseIntensity * 0.3 * breath
+      fillRef.current.intensity = baseIntensity * 0.3 * breath * lightMult
       fillRef.current.color.copy(_col.current)
     }
 
