@@ -1,33 +1,64 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useMemo, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { scrollState } from '../store/scroll'
 
-// The signal. A lower-quadrant semaphore — antique British railway furniture,
-// cast iron post, pivoting red arm, lamp spectacle mounted on the post.
-// The arm's horizontal rest is DANGER. It drops 45° for CLEAR.
-// The cathedral dominates the landscape; this dominates the narrative.
+// British upper-quadrant semaphore signal.
+// Arm horizontal = DANGER (red, default). Arm raised 45° = CLEAR (green).
+// Signal stays red until the user reaches the final text card, then goes
+// green permanently — one transition, no oscillation.
+//
+// The spectacle plate (lenses) is FIXED on the post. Only the arm blade
+// rotates. The lamp housing sits behind the plate at Z=0.15; the plate
+// is in front at Z=0.32.
 
 const SIGNAL_POS = [1.6, 0, -4]
-const HEAD_Y     = 4.6   // arm pivot height and lamp position
-const ARM_LEN    = 1.9   // arm extends this far in −X (toward the track corridor)
+const HEAD_Y     = 4.6
+const ARM_LEN    = 1.9
 
 const COL_RED   = new THREE.Color('#ff1500')
 const COL_GREEN = new THREE.Color('#00ff55')
 
-const postMat          = new THREE.MeshStandardMaterial({ color: '#0e0b09', roughness: 0.88, metalness: 0.52 })
-const ironMat          = new THREE.MeshStandardMaterial({ color: '#0b0907', roughness: 0.92, metalness: 0.48 })
-const armMat           = new THREE.MeshStandardMaterial({ color: '#921200', roughness: 0.72, metalness: 0.18, emissive: new THREE.Color('#280400'), emissiveIntensity: 0.45 })
-const stripeMat        = new THREE.MeshStandardMaterial({ color: '#c8c4bb', roughness: 0.90, metalness: 0.05 })
-const spectaclePlateMat= new THREE.MeshStandardMaterial({ color: '#090705', roughness: 0.85, metalness: 0.65 })
-const woodMat          = new THREE.MeshStandardMaterial({ color: '#150b06', roughness: 1.0,  metalness: 0.0  })
-const plateMat         = new THREE.MeshStandardMaterial({ color: '#070403', roughness: 0.98, metalness: 0.2  })
+const LENS_SEP = 0.370
+const LENS_R   = 0.148
+
+// ── Materials ─────────────────────────────────────────────────────────────────
+const postMat = new THREE.MeshStandardMaterial({
+  color: '#0d0b09', roughness: 0.90, metalness: 0.56,
+})
+const ironMat = new THREE.MeshStandardMaterial({
+  color: '#0b0907', roughness: 0.93, metalness: 0.50,
+})
+const ironLightMat = new THREE.MeshStandardMaterial({
+  color: '#181310', roughness: 0.86, metalness: 0.54,
+})
+const armMat = new THREE.MeshStandardMaterial({
+  color: '#8a1100', roughness: 0.76, metalness: 0.14,
+  emissive: new THREE.Color('#1e0400'), emissiveIntensity: 0.35,
+})
+const stripeMat = new THREE.MeshStandardMaterial({
+  color: '#aeaaa0', roughness: 0.92, metalness: 0.05,
+})
+const specPlateMat = new THREE.MeshStandardMaterial({
+  color: '#080604', roughness: 0.88, metalness: 0.64,
+})
+const lampBodyMat = new THREE.MeshStandardMaterial({
+  color: '#0c0a08', roughness: 0.80, metalness: 0.62,
+})
+const brassMat = new THREE.MeshStandardMaterial({
+  color: '#28200e', roughness: 0.66, metalness: 0.78,
+})
+const concreteMat = new THREE.MeshStandardMaterial({
+  color: '#100e0c', roughness: 0.98, metalness: 0.04,
+})
+const woodMat  = new THREE.MeshStandardMaterial({ color: '#150b06', roughness: 1.0,  metalness: 0.0 })
+const plateMat = new THREE.MeshStandardMaterial({ color: '#070403', roughness: 0.98, metalness: 0.2 })
 
 function makeGlowTexture() {
-  const size = 128
+  const size   = 128
   const canvas = document.createElement('canvas')
   canvas.width = canvas.height = size
-  const ctx = canvas.getContext('2d')
+  const ctx    = canvas.getContext('2d')
   const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2)
   g.addColorStop(0.00, 'rgba(255,255,255,1)')
   g.addColorStop(0.12, 'rgba(255,255,255,0.55)')
@@ -39,7 +70,6 @@ function makeGlowTexture() {
   return new THREE.CanvasTexture(canvas)
 }
 
-// The signal box — a dead hut on the far side of the line.
 function SignalBox() {
   return (
     <group position={[-5.2, 0, -14]} rotation={[0, 0.12, 0]}>
@@ -59,67 +89,126 @@ function SignalBox() {
   )
 }
 
+// ── Spectacle plate (FIXED — not a child of armGroupRef) ─────────────────────
+// Rectangular iron casting at Z=0.32, in front of lamp housing (Z=0.15 ±0.09).
+// Red lens left, green lens right. Sprites co-located with each lens.
+function SpectaclePlate({ redLensRef, greenLensRef, redCoreRef, greenCoreRef, glowTex }) {
+  return (
+    <group position={[0, 0, 0.32]}>
+
+      {/* Main casting */}
+      <mesh material={specPlateMat} castShadow>
+        <boxGeometry args={[0.86, 0.40, 0.050]} />
+      </mesh>
+
+      {/* Bezel rings */}
+      {[-LENS_SEP / 2, LENS_SEP / 2].map((x, i) => (
+        <mesh key={i} material={ironMat} position={[x, 0, 0.030]}>
+          <cylinderGeometry args={[LENS_R + 0.026, LENS_R + 0.026, 0.026, 20, 1, true]} />
+        </mesh>
+      ))}
+
+      {/* Red lens (left) */}
+      <mesh ref={redLensRef} position={[-LENS_SEP / 2, 0, 0.046]}>
+        <circleGeometry args={[LENS_R, 20]} />
+        <meshStandardMaterial
+          color={COL_RED} emissive={COL_RED} emissiveIntensity={0}
+          toneMapped={false} roughness={0.08}
+        />
+      </mesh>
+
+      {/* Green lens (right) */}
+      <mesh ref={greenLensRef} position={[LENS_SEP / 2, 0, 0.046]}>
+        <circleGeometry args={[LENS_R, 20]} />
+        <meshStandardMaterial
+          color={COL_GREEN} emissive={COL_GREEN} emissiveIntensity={0}
+          toneMapped={false} roughness={0.08}
+        />
+      </mesh>
+
+      {/* Centre rib */}
+      <mesh material={specPlateMat} position={[0, 0, 0.030]}>
+        <boxGeometry args={[0.036, 0.38, 0.036]} />
+      </mesh>
+
+      {/* Corner bolt heads */}
+      {[[-0.37, 0.16], [0.37, 0.16], [-0.37, -0.16], [0.37, -0.16]].map(([x, y], i) => (
+        <mesh key={i} material={brassMat} position={[x, y, 0.034]}>
+          <cylinderGeometry args={[0.021, 0.021, 0.016, 6]} />
+        </mesh>
+      ))}
+
+      {/* Core glow at red lens */}
+      <sprite ref={redCoreRef} position={[-LENS_SEP / 2, 0, 0.10]} scale={[0.7, 0.7, 1]}>
+        <spriteMaterial
+          map={glowTex} color={COL_RED}
+          transparent opacity={0}
+          depthWrite={false} blending={THREE.AdditiveBlending}
+          fog={false} toneMapped={false}
+        />
+      </sprite>
+
+      {/* Core glow at green lens */}
+      <sprite ref={greenCoreRef} position={[LENS_SEP / 2, 0, 0.10]} scale={[0.7, 0.7, 1]}>
+        <spriteMaterial
+          map={glowTex} color={COL_GREEN}
+          transparent opacity={0}
+          depthWrite={false} blending={THREE.AdditiveBlending}
+          fog={false} toneMapped={false}
+        />
+      </sprite>
+
+    </group>
+  )
+}
+
+// ── Main export ───────────────────────────────────────────────────────────────
 export function Signal() {
   const [isGreen, setIsGreen] = useState(false)
   const finale = useRef(false)
 
   const glowTex = useMemo(() => makeGlowTexture(), [])
 
-  const armGroupRef  = useRef()  // rotates on state change
-  const spectacleRef = useRef()  // coloured glass roundel, moves with arm
-  const lampRef      = useRef()  // primary pointLight (fixed on post)
-  const fillRef      = useRef()  // fill pointLight (fixed on post)
-  const lensRef      = useRef()  // emissive sphere (fixed on post)
-  const coreRef      = useRef()  // core glow sprite
-  const haloRef      = useRef()  // halo sprite
-  const airRef       = useRef()  // air glow sprite
+  // Only the arm rotates
+  const armGroupRef  = useRef()
 
-  // Refs so useFrame never reads stale closure values
+  // Spectacle plate refs (fixed)
+  const redLensRef   = useRef()
+  const greenLensRef = useRef()
+  const redCoreRef   = useRef()
+  const greenCoreRef = useRef()
+
+  // Lamp refs (fixed)
+  const lampRef  = useRef()
+  const fillRef  = useRef()
+  const haloRef  = useRef()
+  const airRef   = useRef()
+
   const targetGreen = useRef(false)
   const colorBlend  = useRef(0)
-  const _col        = useRef(new THREE.Color())  // reused to avoid per-frame alloc
+  const _col        = useRef(new THREE.Color())
 
-  useEffect(() => {
-    const delay = isGreen
-      ? finale.current
-        ? 16000
-        : 1500 + Math.random() * 4000
-      : 8000 + Math.random() * 24000
-    const id = setTimeout(() => setIsGreen(g => !g), delay)
-    return () => clearTimeout(id)
-  }, [isGreen])
-
+  // No random toggle — signal stays red until finale, then goes green once.
   useEffect(() => { targetGreen.current = isGreen }, [isGreen])
 
   useFrame(({ clock }, delta) => {
     const time = clock.elapsedTime
     const dt   = Math.min(delta, 0.05)
 
-    // Blend toward target aspect — damp transition prevents single-frame
-    // HDR spike that would blow Bloom to full white on the toggle
     const blendTarget = targetGreen.current ? 1 : 0
     colorBlend.current = THREE.MathUtils.damp(colorBlend.current, blendTarget, 8, dt)
     const b = colorBlend.current
 
-    // Semaphore arm — lower-quadrant:
-    //   b=0 (red/DANGER): arm horizontal (0 rad)
-    //   b=1 (green/CLEAR): arm tip drops 45° (PI/4 rad, +Z rotation)
+    // Upper-quadrant: arm horizontal = DANGER (b=0), raised 45° = CLEAR (b=1)
     if (armGroupRef.current) {
-      armGroupRef.current.rotation.z = THREE.MathUtils.lerp(0, Math.PI / 4, b)
+      armGroupRef.current.rotation.z = THREE.MathUtils.lerp(0, -Math.PI / 4, b)
     }
 
     _col.current.lerpColors(COL_RED, COL_GREEN, b)
-    const baseIntensity = THREE.MathUtils.lerp(30, 20, b)  // red brighter — danger, urgency
-
-    // The lamp breathes — barely. Fast or deep modulation of the scene's
-    // dominant light source reads as full-frame flicker (painfully crisp
-    // on 120 Hz displays), so scene ILLUMINATION stays near-stable and
-    // only the visible glow carries a slow, gentle character.
+    const baseIntensity = THREE.MathUtils.lerp(30, 20, b)
     const breath = 0.975 + 0.025 * Math.sin(time * 0.6)
-
-    // Glow character: slow wobble + a rare, shallow, smooth gutter
-    const gut = THREE.MathUtils.smoothstep(Math.sin(time * 0.41 + 0.5), 0.985, 0.998)
-    const glow = (0.94 + 0.06 * Math.sin(time * 0.9 + 1.7)) * (1.0 - 0.15 * gut)
+    const gut    = THREE.MathUtils.smoothstep(Math.sin(time * 0.41 + 0.5), 0.985, 0.998)
+    const glow   = (0.94 + 0.06 * Math.sin(time * 0.9 + 1.7)) * (1.0 - 0.15 * gut)
 
     if (lampRef.current) {
       lampRef.current.intensity = baseIntensity * breath
@@ -129,31 +218,24 @@ export function Signal() {
       fillRef.current.intensity = baseIntensity * 0.3 * breath
       fillRef.current.color.copy(_col.current)
     }
-    if (lensRef.current) {
-      // Lens feeds bloom only — sprites carry the visible glow.
-      // Radius 0.22 (was 0.10) gives stable pixel coverage so camera drift
-      // doesn't cause frame-to-frame HDR spikes into the bloom pass.
-      lensRef.current.material.emissiveIntensity = 4 * glow
-      lensRef.current.material.color.copy(_col.current)
-      lensRef.current.material.emissive.copy(_col.current)
-    }
-    if (spectacleRef.current) {
-      spectacleRef.current.material.emissiveIntensity = 3 * glow
-      spectacleRef.current.material.color.copy(_col.current)
-      spectacleRef.current.material.emissive.copy(_col.current)
-    }
-    if (coreRef.current) {
-      coreRef.current.material.opacity = 0.85 * glow
-      coreRef.current.material.color.copy(_col.current)
-    }
+
+    // Lenses cross-fade
+    if (redLensRef.current)   redLensRef.current.material.emissiveIntensity   = (1 - b) * 4 * glow
+    if (greenLensRef.current) greenLensRef.current.material.emissiveIntensity = b * 4 * glow
+
+    // Core sprites cross-fade
+    if (redCoreRef.current)   redCoreRef.current.material.opacity   = (1 - b) * 0.90 * glow
+    if (greenCoreRef.current) greenCoreRef.current.material.opacity = b * 0.90 * glow
+
     if (haloRef.current) {
-      haloRef.current.material.opacity = 0.2 * (0.7 + 0.3 * glow)
+      haloRef.current.material.opacity = 0.18 * (0.7 + 0.3 * glow)
       haloRef.current.material.color.copy(_col.current)
     }
     if (airRef.current) {
       airRef.current.material.color.copy(_col.current)
     }
 
+    // Finale: go green once when user reaches the last text card
     if (!finale.current && scrollState.smooth > 0.965) {
       finale.current = true
       setTimeout(() => setIsGreen(true), 2600)
@@ -164,14 +246,14 @@ export function Signal() {
     <group>
       <group position={SIGNAL_POS}>
 
-        {/* ── Concrete footing ───────────────────────────────────────────── */}
-        <mesh material={plateMat} position={[0, 0.18, 0]} receiveShadow>
-          <boxGeometry args={[0.52, 0.36, 0.52]} />
+        {/* ── Concrete footing ─────────────────────────────────────────────── */}
+        <mesh material={concreteMat} position={[0, 0.20, 0]} receiveShadow>
+          <boxGeometry args={[0.58, 0.40, 0.58]} />
         </mesh>
 
-        {/* ── Post — tapered cast-iron tube ──────────────────────────────── */}
+        {/* ── Post ─────────────────────────────────────────────────────────── */}
         <mesh material={postMat} position={[0, 2.9, 0]} castShadow>
-          <cylinderGeometry args={[0.060, 0.090, 5.8, 10]} />
+          <cylinderGeometry args={[0.062, 0.096, 5.8, 12]} />
         </mesh>
 
         {/* Finial cap */}
@@ -179,118 +261,132 @@ export function Signal() {
           <sphereGeometry args={[0.10, 8, 6]} />
         </mesh>
 
-        {/* ── Pivot bracket — fixed ironwork at arm height ───────────────── */}
-        <mesh material={ironMat} position={[0, HEAD_Y, 0]} castShadow>
-          <boxGeometry args={[0.30, 0.36, 0.30]} />
+        {/* Step irons */}
+        {[1.20, 1.80].map((y, i) => (
+          <mesh key={i} material={ironMat} position={[0.14, y, 0]}>
+            <boxGeometry args={[0.20, 0.024, 0.065]} />
+          </mesh>
+        ))}
+
+        {/* ── Pivot collar ─────────────────────────────────────────────────── */}
+        <mesh material={ironLightMat} position={[0, HEAD_Y, 0]} castShadow>
+          <cylinderGeometry args={[0.118, 0.118, 0.30, 16]} />
+        </mesh>
+        {[-0.162, 0.162].map((dy, i) => (
+          <mesh key={i} material={ironMat} position={[0, HEAD_Y + dy, 0]}>
+            <cylinderGeometry args={[0.134, 0.134, 0.022, 16]} />
+          </mesh>
+        ))}
+        <mesh material={brassMat} position={[0, HEAD_Y, 0.126]}>
+          <cylinderGeometry args={[0.028, 0.028, 0.020, 6]} />
         </mesh>
 
-        {/* ── Semaphore arm (rotates) ────────────────────────────────────── */}
-        {/* Pivot at [0, HEAD_Y, 0]. Arm extends −X toward the track corridor.
-            At x=1.6 signal, arm tip reaches x≈−0.3 — hangs over the near rail,
-            governing the line it has not stopped for centuries. */}
-        <group ref={armGroupRef} position={[0, HEAD_Y, 0]}>
+        {/* ── Lamp housing (FIXED) ─────────────────────────────────────────── */}
+        {/* Center Z=0.15, depth 0.18 → front face Z=0.24                      */}
+        {/* Spectacle plate is at Z=0.32 — clearly in front                     */}
+        <group position={[0, HEAD_Y, 0.15]}>
 
-          {/* Arm blade */}
-          <mesh material={armMat} position={[-ARM_LEN / 2, 0, 0]} castShadow>
-            <boxGeometry args={[ARM_LEN, 0.27, 0.058]} />
+          <mesh material={lampBodyMat} castShadow>
+            <boxGeometry args={[0.60, 0.36, 0.18]} />
           </mesh>
 
-          {/* White identification stripe near pivot end */}
-          <mesh material={stripeMat} position={[-0.30, 0, 0.033]}>
-            <boxGeometry args={[0.27, 0.29, 0.014]} />
+          {/* Rain hood */}
+          <mesh material={ironMat} position={[0, 0.21, 0.06]}>
+            <boxGeometry args={[0.66, 0.050, 0.32]} />
           </mesh>
 
-          {/* Spectacle plate — circular disc, faces +Z approach direction */}
-          <mesh material={spectaclePlateMat} position={[0, 0, 0.13]} rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.24, 0.24, 0.052, 16]} />
+          {/* Side louvers */}
+          {[-0.32, 0.32].map((x, i) => (
+            <group key={i} position={[x, 0, 0]}>
+              {[-0.08, 0, 0.08].map((dy, j) => (
+                <mesh key={j} material={ironMat} position={[0, dy, 0]} rotation={[0, 0, 0.28]}>
+                  <boxGeometry args={[0.016, 0.078, 0.12]} />
+                </mesh>
+              ))}
+            </group>
+          ))}
+
+          {/* Rear mounting plate */}
+          <mesh material={ironMat} position={[0, 0, -0.10]}>
+            <boxGeometry args={[0.66, 0.42, 0.022]} />
           </mesh>
 
-          {/* Spectacle roundel — emissiveIntensity={0} for same reason as lens */}
-          <mesh ref={spectacleRef} position={[0, 0, 0.16]}>
-            <circleGeometry args={[0.135, 12]} />
-            <meshStandardMaterial
-              color={COL_RED}
-              emissive={COL_RED}
-              emissiveIntensity={0}
-              toneMapped={false}
-            />
-          </mesh>
+          {/* Bracket ears */}
+          {[-0.24, 0.24].map((x, i) => (
+            <mesh key={i} material={brassMat} position={[x, 0, -0.12]}>
+              <cylinderGeometry args={[0.020, 0.020, 0.048, 8]} rotation={[Math.PI / 2, 0, 0]} />
+            </mesh>
+          ))}
 
-          {/* Counterweight — short block below and opposite the arm */}
-          <mesh material={ironMat} position={[0.37, -0.21, 0]} castShadow>
-            <boxGeometry args={[0.32, 0.18, 0.12]} />
-          </mesh>
-
-        </group>
-
-        {/* ── Lamp housing (fixed on post, faces approach direction) ─────── */}
-        {/* The lamp does not move — the spectacle rotates in front of it */}
-        <mesh material={ironMat} position={[0, HEAD_Y - 0.05, 0.22]} castShadow>
-          <boxGeometry args={[0.24, 0.34, 0.30]} />
-        </mesh>
-
-        {/* Hood above lamp housing */}
-        <mesh material={ironMat} position={[0, HEAD_Y + 0.22, 0.26]}>
-          <boxGeometry args={[0.28, 0.065, 0.40]} />
-        </mesh>
-
-        {/* ── Lamp assembly (all fixed — glow, sprites, lights) ─────────── */}
-        <group position={[0, HEAD_Y, 0.26]}>
-
-          {/* Lens sphere — drives Bloom.
-              emissiveIntensity={0} at JSX-init so R3F reconciliation resets
-              are dark (imperceptible) not bright. useFrame owns the value
-              every frame; it was the JSX-declared 14 that caused the flash. */}
-          <mesh ref={lensRef}>
-            <sphereGeometry args={[0.22, 16, 12]} />
-            <meshStandardMaterial
-              color={COL_RED}
-              emissive={COL_RED}
-              emissiveIntensity={0}
-              toneMapped={false}
-            />
-          </mesh>
-
-          {/* Primary lamp — intensity={0} at init; useFrame owns it every frame */}
+          {/* Scene lights */}
           <pointLight ref={lampRef} color={COL_RED} intensity={0} distance={30} decay={2} />
-
-          {/* Atmospheric fill — same: intensity={0} at init */}
           <pointLight ref={fillRef} color={COL_RED} intensity={0} distance={80} decay={1.4} />
 
-          {/* Core glare */}
-          <sprite ref={coreRef} scale={[0.9, 0.9, 1]}>
-            <spriteMaterial
-              map={glowTex} color={COL_RED}
-              transparent opacity={0.85}
-              depthWrite={false}
-              blending={THREE.AdditiveBlending}
-              fog={false} toneMapped={false}
-            />
-          </sprite>
-
-          {/* Outer halo — the light you see before you know what it is */}
+          {/* Wide halo + air-glow */}
           <sprite ref={haloRef} scale={[5.5, 5.5, 1]}>
             <spriteMaterial
               map={glowTex} color={COL_RED}
-              transparent opacity={0.2}
-              depthWrite={false}
-              blending={THREE.AdditiveBlending}
+              transparent opacity={0.18}
+              depthWrite={false} blending={THREE.AdditiveBlending}
               fog={false} toneMapped={false}
             />
           </sprite>
 
-          {/* Air glow — very wide, very faint: the light smeared into the atmosphere */}
           <sprite ref={airRef} scale={[12, 12, 1]}>
             <spriteMaterial
               map={glowTex} color={COL_RED}
               transparent opacity={0.06}
-              depthWrite={false}
-              blending={THREE.AdditiveBlending}
+              depthWrite={false} blending={THREE.AdditiveBlending}
               fog={false} toneMapped={false}
             />
           </sprite>
 
         </group>
+
+        {/* ── Spectacle plate (FIXED — does not rotate) ────────────────────── */}
+        <group position={[0, HEAD_Y, 0]}>
+          <SpectaclePlate
+            redLensRef={redLensRef}
+            greenLensRef={greenLensRef}
+            redCoreRef={redCoreRef}
+            greenCoreRef={greenCoreRef}
+            glowTex={glowTex}
+          />
+        </group>
+
+        {/* ── Rotating arm (ONLY the blade + stripes + counterweight) ──────── */}
+        <group ref={armGroupRef} position={[0, HEAD_Y, 0]}>
+
+          {/* Arm blade — red oxide, extends −X */}
+          <mesh material={armMat} position={[-ARM_LEN / 2, 0, 0]} castShadow>
+            <boxGeometry args={[ARM_LEN, 0.26, 0.058]} />
+          </mesh>
+
+          {/* Fishplate at pivot root */}
+          <mesh material={ironMat} position={[-0.10, 0, 0]}>
+            <boxGeometry args={[0.24, 0.30, 0.068]} />
+          </mesh>
+
+          {/* Primary white stripe */}
+          <mesh material={stripeMat} position={[-0.30, 0, 0.036]}>
+            <boxGeometry args={[0.26, 0.27, 0.016]} />
+          </mesh>
+
+          {/* Second narrow stripe (GWR double-band) */}
+          <mesh material={stripeMat} position={[-ARM_LEN * 0.60, 0, 0.034]}>
+            <boxGeometry args={[0.09, 0.27, 0.012]} />
+          </mesh>
+
+          {/* Counterweight below pivot */}
+          <mesh material={ironMat} position={[0.35, -0.21, 0]} castShadow>
+            <boxGeometry args={[0.30, 0.18, 0.14]} />
+          </mesh>
+          <mesh material={ironMat} position={[0.16, -0.10, 0]}>
+            <boxGeometry args={[0.058, 0.20, 0.040]} />
+          </mesh>
+
+        </group>
+
       </group>
 
       <SignalBox />
