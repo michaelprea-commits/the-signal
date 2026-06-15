@@ -5,21 +5,21 @@
    the final line. No Bold, no Black — an archive, not a poster. */
 @font-face {
   font-family: 'Bueno';
-  src: url('/Fonts/Bueno-ExtraLight.woff2') format('woff2');
+  src: url('/fonts/Bueno-ExtraLight.woff2') format('woff2');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Bueno';
-  src: url('/Fonts/Bueno-Light.woff2') format('woff2');
+  src: url('/fonts/Bueno-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Bueno';
-  src: url('/Fonts/Bueno-Regular.woff2') format('woff2');
+  src: url('/fonts/Bueno-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
