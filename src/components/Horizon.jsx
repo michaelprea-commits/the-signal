@@ -10,9 +10,11 @@ import * as THREE from 'three'
 // more air. Nothing out here competes with the tower; it is background
 // texture, the evidence that the world was once much bigger than this walk.
 
-// Layer colours, graded toward the sky's low band (#1d1440-ish on screen)
-const FAR_MAT = new THREE.MeshBasicMaterial({ color: '#191442', fog: false })
-const MID_MAT = new THREE.MeshBasicMaterial({ color: '#130e35', fog: false })
+// Layer colours: each step closer to the sky tone (aerial perspective).
+// FAR must be noticeably lighter than MID — the differential is what
+// creates visible depth bands rather than a single dark mass.
+const FAR_MAT = new THREE.MeshBasicMaterial({ color: '#2e2668', fog: false })
+const MID_MAT = new THREE.MeshBasicMaterial({ color: '#1e1550', fog: false })
 
 // Warped box — breaks the machine-perfect silhouette
 function WarpedBox({ w, h, d, seed = 1, material, position, rotation }) {
@@ -47,28 +49,26 @@ const MID_MESAS = [
   [ -60, -330, 220, 24, 85],
 ]
 
+// No city here. No towers.
+// Geology, or the scale at which industry becomes geology.
+// Each shape must leave room for a different reading: mesa / ruin / machine.
 function Settlement() {
   return (
     <group>
-      {/* Verticals — chimneys, towers, headframes. Unreadable on purpose. */}
-      <WarpedBox material={MID_MAT} w={11} h={52} d={11} seed={3} position={[-190, 26, -295]} />
-      <WarpedBox material={MID_MAT} w={9}  h={38} d={9}  seed={4} position={[-162, 19, -308]} />
-      <WarpedBox material={MID_MAT} w={14} h={66} d={14} seed={5} position={[-222, 33, -315]} rotation={[0, 0, 0.012]} />
-      <WarpedBox material={MID_MAT} w={8}  h={30} d={8}  seed={6} position={[-132, 15, -300]} />
+      {/* Vast eroded massif — the spine of something enormous. Geology? Infrastructure? */}
+      <WarpedBox material={MID_MAT} w={340} h={20} d={95} seed={11} position={[-140, 10, -312]} />
 
-      {/* Tank */}
-      <mesh material={MID_MAT} position={[-252, 14, -305]}>
-        <cylinderGeometry args={[14, 15, 28, 10]} />
-      </mesh>
+      {/* Scarped cliff face — where the massif has broken away at an angle */}
+      <WarpedBox material={MID_MAT} w={58} h={36} d={52} seed={12} position={[-295, 18, -290]} rotation={[0, -0.04, 0.014]} />
 
-      {/* Long low blocks — sheds, walls, platforms */}
-      <WarpedBox material={MID_MAT} w={88} h={11} d={22} seed={7} position={[-178, 5.5, -290]} rotation={[0, 0.1, 0]} />
-      <WarpedBox material={MID_MAT} w={68} h={9}  d={18} seed={8} position={[-246, 4.5, -320]} rotation={[0, -0.08, 0]} />
+      {/* Long collapsed embankment — aqueduct, berm, or buried wall. Barely legible. */}
+      <WarpedBox material={MID_MAT} w={200} h={7} d={24} seed={13} position={[-430, 3.5, -308]} rotation={[0, 0.14, 0.028]} />
 
-      {/* Leaning mast — the one shape that suggests it all still meant something */}
-      <mesh material={MID_MAT} position={[-116, 24, -298]} rotation={[0.02, 0, 0.1]}>
-        <cylinderGeometry args={[1.0, 1.8, 48, 6]} />
-      </mesh>
+      {/* Right plateau — sedimentary strata in cross-section, or a sheared platform */}
+      <WarpedBox material={MID_MAT} w={95} h={28} d={62} seed={14} position={[335, 14, -296]} rotation={[0, -0.06, 0]} />
+
+      {/* A remnant whose purpose is unreadable — structural mass, not a tower */}
+      <WarpedBox material={MID_MAT} w={48} h={44} d={44} seed={15} position={[490, 22, -280]} rotation={[0, 0.08, 0.016]} />
     </group>
   )
 }

@@ -62,10 +62,10 @@ body::-webkit-scrollbar {
 }
 
 /* Invisible spacer — the only thing creating document scroll height.
-   900vh ≈ 9 viewport-heights: slow, deliberate, with long silences
-   between beats. The journey should feel inevitable, not brisk. */
+   1200vh ≈ 12 viewport-heights: film-title pacing, not web pacing.
+   Each beat has room to settle before the next one arrives. */
 .scroll-driver {
-  height: 900vh;
+  height: 1200vh;
   width: 100%;
   pointer-events: none;
 }
@@ -301,4 +301,15 @@ body::-webkit-scrollbar {
 @media (max-width: 768px) {
   .text-card--one { left: 7vw; bottom: 24vh; }
   .text-card--two { right: 7vw; top: 11vh; }
+
+  /* Full-width container so align-items:center works on narrow portrait screens.
+     Overrides the desktop left:50%/translate(-50%) approach. */
+  .site-title {
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+  .site-title h1       { text-indent: 0; }
+  .site-title__kicker  { text-indent: 0; }
 }

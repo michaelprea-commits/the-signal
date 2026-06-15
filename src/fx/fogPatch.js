@@ -17,7 +17,9 @@ import * as THREE from 'three'
 
 export const fogUniforms = {
   fogTime:        { value: 0 },
-  fogNearColor:   { value: new THREE.Color('#1c1342') },
+  // Near fog: warmer, lighter violet. Creates luminous dusty quality and
+  // gives the near/far gradient visible colour temperature separation.
+  fogNearColor:   { value: new THREE.Color('#2a1c50') },
   fogNoiseFreq:   { value: 0.05 },
   fogNoiseSpeed:  { value: 0.05 },
   fogNoiseImpact: { value: 0.45 },

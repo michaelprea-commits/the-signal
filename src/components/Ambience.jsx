@@ -18,6 +18,11 @@ import { scrollState } from '../store/scroll'
 //   Wires: two high, faint partials with slowly drifting detune —
 //          telegraph wires singing in the wind.
 //
+//   Dissonance: a minor second — C6 (1046 Hz) against C#6 (1109 Hz) —
+//          through a cold programmatic reverb, wet-only. Emerges with the
+//          "Yesterday" beat (p≈0.43); peaks near the final reveal. The
+//          interval never resolves. Felt more than heard.
+//
 // Off by default; browsers require a gesture anyway.
 
 const A1 = 55
@@ -153,6 +158,109 @@ function buildGraph() {
     osc.start()
   })
 
+  // ── Dissonance layer: minor second C6 / C#6 ─────────────────────────────
+  // Wet-only path through a cold programmatic reverb — no dry signal.
+  // The sound lives entirely in the room, not in the source.
+  // Chain: oscillators → voiceGain → dissonanceGain → toneFilter → convolver → master
+  const C6  = 1046.50   // high C
+  const CS6 = 1108.73   // high C# — one semitone above
+
+  // Cold reverb IR built from shaped noise — no asset file required.
+  // 80 ms pre-delay creates the sense of vast distance before the tail arrives.
+  // Decay constant 0.95 ≈ 3.8 s RT60 — enormous, cold, unhurried.
+  const dsRate = ctx.sampleRate
+  const dsIR   = ctx.createBuffer(2, Math.ceil(dsRate * 5.0), dsRate)
+  for (let ch = 0; ch < 2; ch++) {
+    const d = dsIR.getChannelData(ch)
+    for (let i = 0; i < d.length; i++) {
+      const t   = i / dsRate
+      const pre = Math.max(0, Math.min(1, (t - 0.08) / 0.06))
+      const atk = Math.min(1, t / 0.15)
+      const dec = Math.exp(-t * 0.95)
+      d[i] = (Math.random() * 2 - 1) * pre * atk * dec
+    }
+  }
+
+  const dsConv = ctx.createConvolver()
+  dsConv.buffer = dsIR   // normalize = true by default
+
+  const dsReverbOut = ctx.createGain()
+  dsReverbOut.gain.value = 0.32
+  dsConv.connect(dsReverbOut)
+  dsReverbOut.connect(master)
+
+  // Gentle tone shaping before reverb: removes any harshness from the tones,
+  // retains the glassy upper partials that give them their cold character.
+  const dsTone = ctx.createBiquadFilter()
+  dsTone.type = 'lowpass'
+  dsTone.frequency.value = 2400
+  dsTone.Q.value = 0.45
+
+  // Very slow filter sweep — the 2nd/3rd partials breathe while the
+  // fundamentals pass unchanged. ~91 s per full cycle.
+  const dsFilterLFO = ctx.createOscillator()
+  dsFilterLFO.frequency.value = 0.011
+  const dsFilterLFOGain = ctx.createGain()
+  dsFilterLFOGain.gain.value = 650   // ±650 Hz around 2400
+  dsFilterLFO.connect(dsFilterLFOGain)
+  dsFilterLFOGain.connect(dsTone.frequency)
+  dsFilterLFO.start()
+
+  // Master dissonance gain — starts silent; scroll-driven in setInterval below
+  const dissonanceGain = ctx.createGain()
+  dissonanceGain.gain.value = 0
+  dissonanceGain.connect(dsTone)
+  dsTone.connect(dsConv)
+
+  // Glassy pad waveform: fundamental + very quiet 2nd + trace 3rd partial.
+  // Pure sine would be too clean; this adds just enough timbre to read as
+  // a pad rather than a test tone, while staying cold and digital.
+  const dsWave = ctx.createPeriodicWave(
+    new Float32Array([0, 1.0, 0.10, 0.03]),
+    new Float32Array([0, 0,   0,    0   ]),
+  )
+
+  // Four oscillators: C6 ×2 and C#6 ×2, micro-detuned pairs for width.
+  // [frequency, static_detune_cents, pitch_drift_rate_Hz, swell_phase_offset_s]
+  const DS_VOICES = [
+    [C6,   1.1, 0.021, 0.0],
+    [C6,  -1.1, 0.017, 3.2],
+    [CS6,  0.8, 0.027, 7.1],
+    [CS6, -0.8, 0.023, 5.5],
+  ]
+
+  DS_VOICES.forEach(([freq, detCents, driftHz, swellOffset], i) => {
+    const osc = ctx.createOscillator()
+    osc.setPeriodicWave(dsWave)
+    osc.frequency.value = freq
+    osc.detune.value = detCents
+
+    // Individual pitch drift — each voice wanders independently
+    const driftLFO = ctx.createOscillator()
+    driftLFO.frequency.value = driftHz
+    const driftLFOGain = ctx.createGain()
+    driftLFOGain.gain.value = 5.5   // ±5.5 cents of drift
+    driftLFO.connect(driftLFOGain)
+    driftLFOGain.connect(osc.detune)
+    driftLFO.start(ctx.currentTime + i * 4.1)  // staggered phases
+
+    // Very slow amplitude swell — choral breathing, periods of 88–180 s
+    const swellLFO = ctx.createOscillator()
+    swellLFO.frequency.value = 0.0055 + i * 0.0019
+    const swellLFOGain = ctx.createGain()
+    swellLFOGain.gain.value = 0.09
+
+    const voiceGain = ctx.createGain()
+    voiceGain.gain.value = 0.22
+    swellLFO.connect(swellLFOGain)
+    swellLFOGain.connect(voiceGain.gain)
+    swellLFO.start(ctx.currentTime + swellOffset)
+
+    osc.connect(voiceGain)
+    voiceGain.connect(dissonanceGain)
+    osc.start()
+  })
+
   master.gain.linearRampToValueAtTime(1, ctx.currentTime + 2.5)
 
   // Journey coupling: wind eases slightly as the resonance surfaces.
@@ -163,6 +271,11 @@ function buildGraph() {
     const emergence = Math.pow(Math.max(p - 0.08, 0) / 0.92, 1.5)
     droneGain.gain.setTargetAtTime(emergence * 1.0, ctx.currentTime, 0.8)
     windGain.gain.setTargetAtTime(0.16 - p * 0.05, ctx.currentTime, 0.8)
+    // Dissonance: emerges just before "Yesterday" (p≈0.43), peaks near the
+    // final reveal. TC=2.5 s ensures no audible step even at 250 ms poll rate.
+    const dsFade = Math.max(0, Math.min(1, (p - 0.40) / 0.22))
+    const dsPeak = Math.max(0, Math.min(1, (p - 0.80) / 0.20))
+    dissonanceGain.gain.setTargetAtTime(dsFade * 0.24 + dsPeak * 0.16, ctx.currentTime, 2.5)
   }, 250)
 
   return { ctx, intervalId }

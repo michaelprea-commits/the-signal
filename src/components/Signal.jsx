@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo, useState } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { scrollState } from '../store/scroll'
@@ -12,7 +12,7 @@ import { scrollState } from '../store/scroll'
 // rotates. The lamp housing sits behind the plate at Z=0.15; the plate
 // is in front at Z=0.32.
 
-const SIGNAL_POS = [1.6, 0, -4]
+const SIGNAL_POS = [2.2, 0, -4]
 const HEAD_Y     = 4.6
 const ARM_LEN    = 1.9
 
@@ -71,20 +71,57 @@ function makeGlowTexture() {
 }
 
 function SignalBox() {
+  // Evidence of former habitation. Not a landmark.
+  // Smaller and further left so the eye passes through it to the signal.
+  // Base sunk 0.8 units — partial burial suggests decades of neglect.
   return (
-    <group position={[-5.2, 0, -14]} rotation={[0, 0.12, 0]}>
-      <mesh material={woodMat} position={[0, 1.15, 0]} castShadow>
-        <boxGeometry args={[2.6, 2.3, 3.2]} />
+    <group position={[-7.0, -0.8, -16]} rotation={[0, 0.12, 0.026]} scale={0.72}>
+
+      {/* ── Ground floor ─────────────────────────────────────────────────── */}
+      <mesh material={woodMat} position={[0, 1.0, 0]} castShadow>
+        <boxGeometry args={[3.4, 2.0, 5.5]} />
       </mesh>
-      <mesh material={plateMat} position={[-0.62, 2.55, 0]} rotation={[0, 0, 0.55]} castShadow>
-        <boxGeometry args={[1.6, 0.07, 3.5]} />
+
+      {/* ── Operating floor — bay projection, slightly wider and offset ─── */}
+      <mesh material={woodMat} position={[0.08, 3.05, 0]} castShadow>
+        <boxGeometry args={[3.7, 2.1, 5.7]} />
       </mesh>
-      <mesh material={plateMat} position={[0.62, 2.55, 0]} rotation={[0, 0, -0.55]} castShadow>
-        <boxGeometry args={[1.6, 0.07, 3.5]} />
+
+      {/* ── Roof ─────────────────────────────────────────────────────────── */}
+      {/* Left pitch — 37°, steeper, intact */}
+      <mesh material={plateMat} position={[-0.83, 4.86, 0.1]} rotation={[0, 0, 0.64]}>
+        <boxGeometry args={[2.55, 0.09, 5.8]} />
       </mesh>
-      <mesh material={plateMat} position={[0.7, 3.0, -0.9]}>
-        <boxGeometry args={[0.28, 0.8, 0.28]} />
+      {/* Right pitch — 23°, shallower, stops short at rear */}
+      <mesh material={plateMat} position={[0.89, 4.52, -0.4]} rotation={[0, 0, -0.41]}>
+        <boxGeometry args={[2.1, 0.09, 4.2]} />
       </mesh>
+      {/* Ridge board — off-centre, warped */}
+      <mesh material={plateMat} position={[0.06, 5.28, 0.05]} rotation={[0.015, 0, 0.018]}>
+        <boxGeometry args={[0.16, 0.70, 5.8]} />
+      </mesh>
+      {/* Front gable */}
+      <mesh material={plateMat} position={[0.04, 4.74, -2.9]}>
+        <boxGeometry args={[3.6, 2.5, 0.11]} />
+      </mesh>
+      {/* Rear gable */}
+      <mesh material={plateMat} position={[0.0, 4.74, 2.9]}>
+        <boxGeometry args={[3.6, 2.5, 0.11]} />
+      </mesh>
+
+      {/* ── Chimney ──────────────────────────────────────────────────────── */}
+      <mesh material={ironMat} position={[0.6, 5.85, 0.4]} rotation={[0.02, 0, 0.14]} castShadow>
+        <boxGeometry args={[0.48, 1.7, 0.48]} />
+      </mesh>
+      <mesh material={ironMat} position={[0.48, 6.76, 0.46]} rotation={[0.12, 0.06, 0.21]}>
+        <boxGeometry args={[0.30, 0.15, 0.22]} />
+      </mesh>
+
+      {/* ── Detached cladding board ──────────────────────────────────────── */}
+      <mesh material={woodMat} position={[1.88, 3.55, 1.0]} rotation={[0.05, 0, 0.16]}>
+        <boxGeometry args={[0.12, 0.88, 0.65]} />
+      </mesh>
+
     </group>
   )
 }
@@ -164,9 +201,6 @@ function SpectaclePlate({ redLensRef, greenLensRef, redCoreRef, greenCoreRef, gl
 
 // ── Main export ───────────────────────────────────────────────────────────────
 export function Signal() {
-  const [isGreen, setIsGreen] = useState(false)
-  const finale = useRef(false)
-
   const glowTex = useMemo(() => makeGlowTexture(), [])
 
   // Only the arm rotates
@@ -184,12 +218,14 @@ export function Signal() {
   const haloRef  = useRef()
   const airRef   = useRef()
 
-  const targetGreen = useRef(false)
-  const colorBlend  = useRef(0)
-  const _col        = useRef(new THREE.Color())
+  const targetGreen  = useRef(false)
+  const colorBlend   = useRef(0)
+  const _col         = useRef(new THREE.Color())
 
-  // No random toggle — signal stays red until finale, then goes green once.
-  useEffect(() => { targetGreen.current = isGreen }, [isGreen])
+  // Finale: green triggers once past threshold, reverses when scrolled back.
+  // Timer fires after 2600ms dramatic pause; cleared immediately on reversal.
+  const greenArmed = useRef(false)
+  const timerRef   = useRef(null)
 
   useFrame(({ clock }, delta) => {
     const time = clock.elapsedTime
@@ -245,10 +281,15 @@ export function Signal() {
       airRef.current.material.color.copy(_col.current)
     }
 
-    // Finale: go green once when user reaches the last text card
-    if (!finale.current && scrollState.smooth > 0.965) {
-      finale.current = true
-      setTimeout(() => setIsGreen(true), 2600)
+    // Finale: bidirectional — green when past threshold, red when reversed.
+    const pastThreshold = scrollState.smooth > 0.965
+    if (pastThreshold && !greenArmed.current) {
+      greenArmed.current = true
+      timerRef.current = setTimeout(() => { targetGreen.current = true }, 2600)
+    } else if (!pastThreshold && greenArmed.current) {
+      greenArmed.current = false
+      if (timerRef.current) { clearTimeout(timerRef.current); timerRef.current = null }
+      targetGreen.current = false
     }
   })
 

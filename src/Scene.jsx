@@ -59,7 +59,16 @@ function Lighting() {
         position={[-25, 2, -30]}
       />
 
-      <ambientLight color="#06040e" intensity={0.08} />
+      {/* Cathedral atmospheric wrap — two ghost-of-atmosphere sources that
+          reveal stone plane normals without reading as a light source.
+          Upper-left-far: the blue residue of the sky above the far horizon.
+          Right-and-behind: the atmospheric afterglow the stones would catch
+          from a horizon they face. Near objects are unaffected — at intensity
+          < 0.10 with near-black colours the signal's 20–30 unit lamps dominate. */}
+      <directionalLight color="#14102c" intensity={0.09} position={[-80, 70, -220]} />
+      <directionalLight color="#1a0c24" intensity={0.07} position={[140, 8, -200]} />
+
+      <ambientLight color="#06040e" intensity={0.09} />
     </>
   )
 }
@@ -95,7 +104,8 @@ export default function Scene() {
           noise and altitude locally REDUCE it. The heavy, uneven
           obscuration is still the Atmosphere banks; kilometre-scale depth
           is the matte horizon layers. */}
-      <fogExp2 attach="fog" args={['#0b0820', 0.032]} />
+      {/* Base fog: shifted slightly warmer so near/far have visible colour separation */}
+      <fogExp2 attach="fog" args={['#0e0a24', 0.032]} />
       <VolumetricFog />
 
       <CameraRig />

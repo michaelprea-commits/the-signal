@@ -5,10 +5,21 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 // ─── Narrative cards ─────────────────────────────────────────────────────────
-// enterPct / leavePct are fractions of total scroll (0–1) over 900vh.
+// enterPct / leavePct are fractions of total scroll (0–1) over 1200vh.
 // Visibility is a pure function of scroll progress, applied by a single
 // deterministic state machine — no per-card enter/leave callbacks to fall
 // out of sync when the scroll jumps or the page refreshes mid-journey.
+//
+// Pacing: film title sequence, not web. Each card has enough window to
+// fully arrive, be read twice, and linger before it leaves.
+//   c0: 0.07→0.30 = 276vh  ("the light began")
+//   c1: 0.43→0.70 = 324vh  ("the tracks were found")
+//   c2: 0.87→∞              ("The line had been closed")
+//
+// Silences between beats are load-bearing:
+//   title out → c0 in: ~60vh
+//   c0 out → c1 in: 156vh  — the hill occlusion lives here
+//   c1 out → c2 in: 204vh  — walking alone toward the signal
 //
 // Each beat is three voices, individually timed:
 //   kicker   → fades up as its tracking settles
@@ -17,35 +28,35 @@ gsap.registerPlugin(ScrollTrigger)
 const CARDS = [
   {
     id:       'c0',
-    kicker:   'Day one',
+    kicker:   'Field record',
     dominant: 'Two days ago,',
     quiet:    'the light began.',
     cls:      'text-card--one',
-    enterPct: 0.10,
-    leavePct: 0.26,
+    enterPct: 0.07,
+    leavePct: 0.30,
   },
   {
     id:       'c1',
-    kicker:   'Day two',
+    kicker:   'Field record',
     dominant: 'Yesterday,',
     quiet:    'the tracks were found.',
     cls:      'text-card--two',
-    enterPct: 0.50,
-    leavePct: 0.64,
+    enterPct: 0.43,
+    leavePct: 0.70,
   },
   {
     id:       'c2',
-    kicker:   'Day three',
+    kicker:   'Final entry',
     dominant: 'The line had been closed',
     quiet:    'for centuries.',
     cls:      'text-card--final',
-    enterPct: 0.90,
+    enterPct: 0.87,
     leavePct: 1.1,    // never leaves going forward
     final:    true,
   },
 ]
 
-const TITLE_LEAVE = 0.025
+const TITLE_LEAVE = 0.040
 
 const CLIP_FULL   = 'inset(0% 0% 0% 0%)'
 const CLIP_BOTTOM = 'inset(0% 0% 100% 0%)' // hidden below — entrances

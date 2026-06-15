@@ -22,9 +22,16 @@ const PATH = new THREE.CatmullRomCurve3([
   new THREE.Vector3(1.3, 1.38, 3.5),  // alongside the cathedral, before the signal
 ])
 
-// The signal head (lamp at ~[1.6, 4.6, -4]) — aimed just below it so the
-// lamp hangs upper-third with the rails leading to it in the lower frame.
-const SIGNAL_LOOK = new THREE.Vector3(1.6, 3.6, -4)
+// The gaze settles LEFT of the signal head, not AT it.
+// Camera looks toward x=1.0; signal head is at x=2.2 — the 1.2-unit offset
+// over 7.5 depth puts the signal at ~64% from the left of the frame,
+// creating the "there it is" discovery composition rather than "here it is."
+//
+// On mobile portrait the horizontal FOV collapses to ~22° (vs desktop ~64°),
+// so the same 1.2-unit offset pushes the signal to ~92% from left — nearly
+// off-screen. Shift look target right on mobile to put signal at ~63% instead.
+const _mobileLook = typeof window !== 'undefined' && window.innerWidth < 768
+const SIGNAL_LOOK = new THREE.Vector3(_mobileLook ? 1.8 : 1.0, 3.6, -4)
 
 function smoothstep(a, b, x) {
   const t = THREE.MathUtils.clamp((x - a) / (b - a), 0, 1)

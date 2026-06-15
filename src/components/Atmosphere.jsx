@@ -59,6 +59,11 @@ const fragmentShader = /* glsl */ `
 // For ~80% of the journey the structure stays buried in these; each bank
 // only dissolves as the camera physically reaches it, so the signal is
 // unreadable until the final approach — and even the reveal keeps a veil.
+//
+// The three deep-field planes (z=-35, -70, -110) fill the gap between the
+// signal's immediate atmosphere and the cathedral at z=-160. The camera
+// never reaches them so approach=1 always; they are permanent haze layers
+// ensuring signal and cathedral breathe different air.
 const CURTAINS = [
   [64, 0.40],
   [52, 0.44],
@@ -68,15 +73,22 @@ const CURTAINS = [
   [12, 0.34],
   [6,  0.28],
   [0,  0.22],
-  [-9, 0.30],
-  [-15, 0.30],  // stands before the cathedral's face — it never fully resolves
+  [-9,  0.45],
+  [-15, 0.50],  // thickened: the veil behind the signal, before the deep field
+  [-35, 0.55],  // deep field — atmospheric separation layer 1
+  [-70, 0.60],  // deep field — atmospheric separation layer 2
+  [-110, 0.54], // deep field — atmospheric separation layer 3
 ]
 
 // Stratified haze — vast static gradient banks between the distant matte
 // layers. They put "air" behind every silhouette: aerial perspective the
 // exponential fog can't provide at those distances.
+// The near stratum (z=-20) is a thin knee-height band that separates the
+// signal from the signal box depth, creating a foreground / mid / distance
+// read without increasing global density.
 // [z, y, width, height, density]
 const STRATA = [
+  [-20, 1.5, 180,  6, 0.16],  // near — knee-height separation, signal to signal box
   [-70,  8,  500,  30, 0.26],
   [-200, 14, 1100, 60, 0.32],
   [-420, 24, 1500, 110, 0.40],
@@ -86,13 +98,18 @@ const STRATA = [
 // Seen obliquely from eye height they read as the thin breath that hangs
 // over cold ground at dusk. They cover the WHOLE walk: the camera is
 // always looking through this layer, never merely at it.
+// Foreground entries (z=4 and z=-10) pool mist right around the signal
+// base — the viewer is always looking through this layer, creating layered
+// depth between camera, signal, and the deeper field.
 // [z, density]
 const GROUND_MIST = [
   [68, 0.14],
   [52, 0.16],
   [30, 0.16],
   [12, 0.14],
+  [ 4, 0.20],  // foreground — camera end, pools around signal base
   [-6, 0.18],
+  [-10, 0.16], // near-mid — separates signal from signal box depth
 ]
 
 function Curtain({ z, density, seed }) {
@@ -104,7 +121,8 @@ function Curtain({ z, density, seed }) {
     uSeed:  { value: seed },
     // Fine enough that close banks read as drifting mist, never as masonry
     uScale: { value: new THREE.Vector2(7.5, 1.8) },
-    uColor: { value: new THREE.Color('#181244') },
+    // Lifted warmer violet: adds luminosity, less opaque-wall-of-dark
+    uColor: { value: new THREE.Color('#221a4e') },
   }), [density, seed])
 
   useFrame(({ clock, camera }) => {
@@ -143,7 +161,8 @@ function GroundMist({ z, density, seed }) {
     uScale: { value: new THREE.Vector2(7.0, 3.0) },
     // Slightly warm — near air carries the ground's residue. The far
     // strata run cooler: chromatic separation is a depth cue.
-    uColor: { value: new THREE.Color('#1c1538') },
+    // Lifted warmer: ground mist reads as breathable air, not dark ink
+    uColor: { value: new THREE.Color('#261c48') },
   }), [density, seed])
 
   useFrame(({ clock }) => {
@@ -178,7 +197,8 @@ function Stratum({ z, y, width, height, density, seed }) {
     // Long horizontal wisps — distant haze stratifies, it doesn't clump.
     // Cooler than the near mist: colour falls off with distance.
     uScale: { value: new THREE.Vector2(18.0, 2.6) },
-    uColor: { value: new THREE.Color('#0f0c30') },
+    // Lifted: distant strata need to be distinguishable from the black sky
+    uColor: { value: new THREE.Color('#16103e') },
   }), [density, seed])
 
   useFrame(({ clock }) => {
@@ -234,11 +254,11 @@ function Dust() {
   return (
     <points ref={ref} geometry={geometry}>
       <pointsMaterial
-        size={0.06}
+        size={0.035}
         sizeAttenuation
         color="#8a7050"
         transparent
-        opacity={0.18}
+        opacity={0.30}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />

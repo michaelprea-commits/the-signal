@@ -17,7 +17,7 @@ export default function App() {
         <Canvas
           shadows={{ type: PCFShadowMap }}
           camera={CAMERA_START}
-          gl={{ antialias: false, alpha: false }}
+          gl={{ antialias: true, alpha: false }}
           dpr={[1, 1.5]}
         >
           <Scene />
