@@ -117,6 +117,7 @@ collections:
                 fields:
                   - { label: "Embed URL (e.g. /signal)", name: src, widget: string }
                   - { label: "Caption", name: caption, widget: string, required: false }
+                  - { label: "Enter button label", name: enterLabel, widget: string, required: false }
                   - { label: "Full-screen link (optional, defaults to same URL)", name: href, widget: string, required: false }
               - label: "Full-bleed image or video"
                 name: fullbleed

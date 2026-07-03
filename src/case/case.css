@@ -148,10 +148,16 @@ html.lenis, html.lenis body { height: auto; }
 .fullbleed--square { width: min(76vw, 82vh); height: auto; aspect-ratio: 1 / 1; left: 50%; }
 .fullbleed--square figcaption { left: 0; bottom: -2.4rem; }
 
-/* ─ live canvas embed (an interactive scene, not a video) ─ */
-.canvas-embed { position: relative; width: 100vw; left: 50%; transform: translateX(-50%); height: 88vh; margin: var(--section) 0; background: #0a0a0a; }
+/* ─ live canvas embed (an interactive scene, not a video). Deliberately
+   not full-bleed: a live WebGL scroll-hijacking scene needs margin either
+   side so the page can still be scrolled from beside it, and it only loads
+   once someone opts in via the gate (no scroll-trap on arrival). ─ */
+.canvas-embed { position: relative; width: min(86vw, 1180px); height: 78vh; margin: var(--section) auto; background: #0a0a0a; }
 .canvas-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-.canvas-embed figcaption { position: absolute; left: var(--gut); bottom: 1.8rem; z-index: 2; display: flex; align-items: baseline; gap: 1.2rem; }
+.canvas-embed__gate { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 40%, #1c2230 0%, #0a0a0a 70%); border: 1px solid var(--line); cursor: pointer; padding: 0; }
+.canvas-embed__gate-label { font-family: var(--mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink); border: 1px solid var(--accent); padding: 0.9rem 1.8rem; transition: background 0.25s ease, color 0.25s ease; }
+.canvas-embed__gate:hover .canvas-embed__gate-label { background: var(--accent); color: #141414; }
+.canvas-embed figcaption { position: absolute; left: 0; bottom: -2.4rem; z-index: 2; display: flex; align-items: baseline; gap: 1.2rem; }
 .canvas-embed__link { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); text-decoration: none; }
 .canvas-embed__link:hover { text-decoration: underline; }
 
@@ -205,7 +211,7 @@ html.lenis, html.lenis body { height: auto; }
   .split__media { height: 52vh; }
   .fullbleed { height: 60vh; }
   .fullbleed--square { width: 92vw; height: auto; aspect-ratio: 1 / 1; }
-  .canvas-embed { height: 60vh; }
+  .canvas-embed { width: 94vw; height: 60vh; }
   .reel { height: 54vh; }
   .next-case { min-height: 58vh; }
 }

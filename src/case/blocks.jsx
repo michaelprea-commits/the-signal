@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
 // Block kit. Display lines use a manual mask (.d-line > .d-line__i) so authored
 // rags and per-line accent survive; flowing prose is split by GSAP SplitText.
@@ -103,9 +103,16 @@ function FullBleed({ b }) {
 }
 
 function CanvasEmbed({ b }) {
+  const [entered, setEntered] = useState(false)
   return (
     <figure className="canvas-embed">
-      <iframe src={b.src} title={b.caption || 'Live scene'} loading="lazy" />
+      {entered ? (
+        <iframe src={b.src} title={b.caption || 'Live scene'} />
+      ) : (
+        <button type="button" className="canvas-embed__gate" onClick={() => setEntered(true)}>
+          <span className="canvas-embed__gate-label">{b.enterLabel || 'Step inside ↗'}</span>
+        </button>
+      )}
       {(b.caption || b.href) && (
         <figcaption>
           <Eyebrow tick data-reveal="fade">{b.caption}</Eyebrow>
