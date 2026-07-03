@@ -61,7 +61,7 @@
       "type": "split",
       "side": "right",
       "image": "/hold/hey-bird/02.webp",
-      "text": "Ideas were tested. A smoking fish? Matchbook screenprint? Speech bubbles? Refined over weeks, slowly honing down to the right species of fish, the right expression, the right amount of weird.  "
+      "text": "Ideas were tested. A smoking fish? Matchbook screenprint? Speech bubbles? Refined over weeks, slowly honing down to the right species of fish, the right expression, the right amount of weird."
     },
     {
       "type": "quote",
@@ -80,12 +80,7 @@
         "kept honest."
       ],
       "paragraphs": [
-        "The website carries the same voice as the brandmark. \"Do not scroll",
-        "\" a label reading \"for internal use only",
-        "\" a welcome that just says \"Welcome to the studio",
-        "pal.\" It reads like it was written by the studio",
-        "because the tone of voice was built alongside the visual identity",
-        "not bolted on after."
+        "The website carries the same voice as the brandmark. \"Do not scroll,\" a label reading \"for internal use only,\" a welcome that just says \"Welcome to the studio, pal.\" It reads like it was written by the studio, because the tone of voice was built alongside the visual identity, not bolted on after."
       ]
     },
     {
@@ -121,6 +116,13 @@
         "/hold/hey-bird/05.webp",
         "/hold/hey-bird/06.webp"
       ]
+    },
+    {
+      "type": "testimonial",
+      "quote": "We get so much positive feedback on our website, it's amazing. Some people who visited it told us later it's one of the best and most fun studio websites they've ever seen.",
+      "name": "Petr Skornok",
+      "role": "CEO / Producer, Hey Bird!",
+      "source": "Message to Michael, 2026"
     },
     {
       "type": "testimonial",
