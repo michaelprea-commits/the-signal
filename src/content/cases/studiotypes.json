@@ -1,0 +1,76 @@
+{
+  "slug": "studiotypes",
+  "title": "Studiotypes",
+  "cls": "Brand & identity",
+  "accent": "#c6f23c",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrowLeft": "Studiotypes",
+      "eyebrowRight": "Brand & identity",
+      "spine": "Michael Rea · Selected work",
+      "headline": ["Great teams,", "great", "games."],
+      "accentLine": 2,
+      "subhead": "Studiotypes believe great teams make great games. They asked for a brand and a site that could say so plainly, with a bit of charm and a lot of craft.",
+      "meta": "Brand identity & website",
+      "index": "03 / 08"
+    },
+    { "type": "reel", "src": "/hold/studiotypes/hero.webm", "caption": "Studiotypes, in motion." },
+    {
+      "type": "facts",
+      "items": [
+        { "key": "Client", "value": "Studiotypes" },
+        { "key": "Disciplines", "value": "Brand · Web · 3D · Motion" },
+        { "key": "Role", "value": "Design & art direction" },
+        { "key": "Output", "value": "Identity & website" }
+      ]
+    },
+    {
+      "type": "movement",
+      "num": "01",
+      "label": "The brief",
+      "heading": ["Precision, meet", "creativity."],
+      "paragraphs": [
+        "The project began with a dig into who they actually are, a collaborative, forward-looking approach to game development that balances technical excellence with the people behind it. The brand needed to hold both without breaking a sweat."
+      ]
+    },
+    {
+      "type": "movement",
+      "num": "02",
+      "label": "The idea",
+      "heading": ["The engineering", "mindset."],
+      "paragraphs": [
+        "Early wireframes focused on clarity, hierarchy and engagement. We explored structural 3D consoles and controllers as visual metaphors for the inner workings of a studio, careful never to crowd the core message.",
+        "The final design embraces a minimal, technical aesthetic, with detailed wireframe renders as a nod to the engineering mindset. The typography follows suit, clean, modern and set with intent."
+      ]
+    },
+    {
+      "type": "split",
+      "side": "right",
+      "image": "/hold/studiotypes/02.webp",
+      "text": "Interaction design carried a lot of the character. Fluid scrolling, subtle parallax and unhurried transitions give the site a quietly cinematic feel, a little like the layered way games themselves come together."
+    },
+    { "type": "quote", "lines": ["A studio brand", "with the engineering", "showing."] },
+    { "type": "fullbleed", "image": "/hold/studiotypes/03.webp", "caption": "Wireframe renders, a nod to the engineering mindset." },
+    { "type": "statement", "lines": ["Identity, website", "and voice, built", "as one system."], "accentLine": 2 },
+    {
+      "type": "movement",
+      "num": "03",
+      "label": "The result",
+      "heading": ["A high-performance", "showcase."],
+      "paragraphs": [
+        "The finished site is a high-performance showcase for the Studiotypes brand, and I suspect its favourite trick is restraint. It attracts exactly the sort of teams it was built to describe."
+      ]
+    },
+    { "type": "gallery", "images": ["/hold/studiotypes/04.webp", "/hold/studiotypes/05.webp", "/hold/studiotypes/06.webp"] },
+    {
+      "type": "credits",
+      "items": [
+        { "key": "Client", "value": "Studiotypes" },
+        { "key": "Role", "value": "Brand identity, web design, art direction" },
+        { "key": "Disciplines", "value": "Brand · web · 3D · motion" }
+      ]
+    },
+    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "03 / 08" }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "slug": "chaos-gate",
+  "title": "Chaos Gate",
+  "cls": "Key art direction",
+  "accent": "#c6f23c",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrowLeft": "Warhammer 40,000",
+      "eyebrowRight": "Key art direction",
+      "spine": "Michael Rea · Selected work",
+      "headline": ["Grim.", "Dark.", "Glorious."],
+      "accentLine": 2,
+      "subhead": "Identity and creative direction for Chaos Gate: Deathwatch, with Frontier and Other Things. Forty millennia of lore, a famously devoted fanbase, and a licence that guards both closely.",
+      "meta": "Identity & creative direction · Frontier · Other Things",
+      "index": "04 / 08"
+    },
+    { "type": "reel", "src": "/home/chaos-gate.webm", "caption": "Chaos Gate: Deathwatch." },
+    {
+      "type": "facts",
+      "items": [
+        { "key": "Client", "value": "Frontier Developments" },
+        { "key": "Agency", "value": "Other Things" },
+        { "key": "Role", "value": "Identity, logo, brand guidelines" },
+        { "key": "Licence", "value": "Games Workshop · Warhammer 40,000" }
+      ]
+    },
+    {
+      "type": "movement",
+      "num": "01",
+      "label": "The brief",
+      "heading": ["A universe with", "firm rules."],
+      "paragraphs": [
+        "Warhammer arrives with rules. The Grey Knights have a canon, Nurgle has a look, and Games Workshop quite rightly guards both. The job was the wordmark and the brand system behind it, built to survive review, and clear enough that anyone applying it to artwork later could follow it without guesswork."
+      ]
+    },
+    {
+      "type": "split",
+      "side": "right",
+      "image": "/hold/chaos-gate/01.webp",
+      "text": "The logo was built and lit in 3D rather than drawn flat, so it could be rendered consistently across trailers, storefronts and motion, always catching light the same way."
+    },
+    { "type": "quote", "lines": ["A brand system", "built to survive", "the licence."] },
+    {
+      "type": "movement",
+      "num": "02",
+      "label": "The system",
+      "heading": ["Guidelines,", "not guesswork."],
+      "paragraphs": [
+        "Beyond the mark, the job was a full guidelines document: a colour palette in both primary and secondary use, and clear rules for where the logo sits on key art, so it stays legible without ever covering the parts of an image that matter.",
+        "Early direction sketches set out how a scene should read before any final artwork existed, so composition and hierarchy were agreed before a single frame was painted."
+      ]
+    },
+    { "type": "fullbleed", "image": "/hold/chaos-gate/02.webm", "caption": "The wordmark, built and lit in 3D." },
+    { "type": "gallery", "images": ["/hold/chaos-gate/03.webp", "/hold/chaos-gate/04.webp", "/hold/chaos-gate/05.webp"] },
+    { "type": "statement", "lines": ["A system built", "to hold at", "every size."], "accentLine": 2 },
+    {
+      "type": "movement",
+      "num": "03",
+      "label": "In the wild",
+      "heading": ["Shipped across", "the campaign."],
+      "paragraphs": [
+        "The identity shipped across the launch campaign, applied consistently by the wider team to trailers, storefronts and marketing. Working inside a universe this loved was a proper education, and the firm rules are likely why the system holds up as well as it does."
+      ]
+    },
+    {
+      "type": "credits",
+      "items": [
+        { "key": "Client", "value": "Frontier Developments" },
+        { "key": "Agency", "value": "Other Things" },
+        { "key": "Role", "value": "Identity, logo, brand guidelines, creative direction" },
+        { "key": "Licence", "value": "Games Workshop · Warhammer 40,000" }
+      ]
+    },
+    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "04 / 08" }
+  ]
+}

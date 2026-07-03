@@ -1,0 +1,78 @@
+{
+  "slug": "battle-road",
+  "title": "Battle Road",
+  "cls": "Brand & web",
+  "accent": "#c6f23c",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrowLeft": "Battle Road",
+      "eyebrowRight": "Brand & web",
+      "spine": "Michael Rea · Selected work",
+      "headline": ["Endurance.", "Resilience.", "Propulsion."],
+      "accentLine": 2,
+      "subhead": "Battle Road came together the honest way, through cheerful and relentless iteration, each pass keeping only the bits that worked.",
+      "meta": "Brand identity & website",
+      "index": "07 / 08"
+    },
+    { "type": "reel", "src": "/hold/battle-road/hero.webm", "caption": "Battle Road, in motion." },
+    {
+      "type": "facts",
+      "items": [
+        { "key": "Client", "value": "Battle Road" },
+        { "key": "Disciplines", "value": "Brand · 3D · Web · Motion" },
+        { "key": "Role", "value": "Design & art direction" },
+        { "key": "Output", "value": "Identity & website" }
+      ]
+    },
+    {
+      "type": "movement",
+      "num": "01",
+      "label": "The brief",
+      "heading": ["Distilled through", "iteration."],
+      "paragraphs": [
+        "Some ideas arrive fully formed. This one was earned, refined step by step until the core of it felt inevitable."
+      ]
+    },
+    {
+      "type": "movement",
+      "num": "02",
+      "label": "The idea",
+      "heading": ["Endurance,", "mapped."],
+      "paragraphs": [
+        "Early explorations circled endurance, resilience and a pioneering spirit drawn from the founders themselves. I worked through a range of directions before settling on the peregrine falcon, native to the company’s Boston headquarters and a rather good icon for an adventurous, fast-moving team.",
+        "Topographic lines felt like a natural fit too, suggesting aerial landscapes while nodding to the digital and the scientific."
+      ]
+    },
+    {
+      "type": "split",
+      "side": "right",
+      "image": "/hold/battle-road/02.webp",
+      "text": "The final mark captures a sense of propulsion, streamlined and inspired by navigational glyphs and the sharp geometry of flight paths. It suggests movement and clarity, balancing the raw with the precise."
+    },
+    { "type": "quote", "lines": ["A mark built for", "movement, clarity,", "propulsion."] },
+    { "type": "fullbleed", "image": "/hold/battle-road/03.webp", "caption": "Topographic 3D landscapes of the Boston area, built in Blender." },
+    { "type": "statement", "lines": ["An identity built", "through", "iteration."], "accentLine": 2 },
+    {
+      "type": "movement",
+      "num": "03",
+      "label": "The result",
+      "heading": ["Engineered", "for speed."],
+      "paragraphs": [
+        "The brand was designed for flexibility, as comfortable on a huge wall as it is in your hand on a business card. With a mix of 3D renders and vector linework, the client had enough to build on for years.",
+        "The website followed the same philosophy. Wireframes began intentionally brutalist, all harsh contrast and sharp angles, then resolved into something calmer, with clean grids, strong typography and measured negative space.",
+        "Motion mattered throughout. Menus slide, hovers reward a wandering cursor, transitions feel deliberate. The experience mirrors the identity, engineered, structured and built for speed."
+      ]
+    },
+    { "type": "gallery", "images": ["/hold/battle-road/04.webp", "/hold/battle-road/05.webp", "/hold/battle-road/06.webp"] },
+    {
+      "type": "credits",
+      "items": [
+        { "key": "Client", "value": "Battle Road" },
+        { "key": "Role", "value": "Brand identity, 3D, web design, motion" },
+        { "key": "Disciplines", "value": "Brand · 3D · web · motion" }
+      ]
+    },
+    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "07 / 08" }
+  ]
+}

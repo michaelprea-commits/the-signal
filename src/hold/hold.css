@@ -1,0 +1,130 @@
+/* ─── The Hold — overlay layer ───────────────────────────────────────────────
+   Editorial, hairline, dim — the same restraint as The Signal's type system.
+   Bueno (loaded in index.css) for labels/headings; a system serif for the
+   dossier body, which has to stay readable at length. */
+
+/* Scroll runway for the facility (camera-scroll). Shorter than The Signal's
+   1200vh — this journey is opener → pull-back → glide, not a full narrative. */
+.hold-scroll-driver { height: 600vh; width: 100%; pointer-events: none; }
+
+/* Open from held black, like The Signal. */
+.hold-veil {
+  position: fixed; inset: 0; z-index: 50; background: #04070a;
+  pointer-events: none; animation: hold-veil-out 2.2s ease 0.3s forwards;
+}
+@keyframes hold-veil-out { to { opacity: 0; visibility: hidden; } }
+
+/* ─── HUD ─────────────────────────────────────────────────────────────────── */
+.hold-hud {
+  position: fixed; inset: 0; z-index: 20; pointer-events: none;
+  font-family: 'Bueno', sans-serif;
+}
+.hold-hud__brand { position: absolute; top: 3.2vh; left: 3vw; }
+.hold-hud__mark {
+  display: block; font-weight: 300; text-transform: uppercase;
+  letter-spacing: 0.42em; text-indent: 0.42em;
+  font-size: clamp(0.72rem, 1vw, 0.9rem); color: rgba(232, 221, 196, 0.82);
+}
+.hold-hud__sub {
+  display: block; margin-top: 0.8em; font-weight: 400; text-transform: uppercase;
+  letter-spacing: 0.34em; text-indent: 0.34em;
+  font-size: clamp(0.46rem, 0.7vw, 0.58rem); color: rgba(150, 190, 185, 0.45);
+}
+.hold-hud__right {
+  position: absolute; top: 3.2vh; right: 3vw;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 1em;
+}
+.hold-hud__count {
+  font-weight: 400; letter-spacing: 0.3em; text-transform: lowercase;
+  font-size: clamp(0.5rem, 0.75vw, 0.62rem); color: rgba(150, 190, 185, 0.6);
+}
+.hold-hud__link {
+  pointer-events: auto; appearance: none; background: none; border: none;
+  cursor: pointer; font-family: 'Bueno', sans-serif; font-weight: 400;
+  letter-spacing: 0.3em; text-transform: lowercase;
+  font-size: clamp(0.5rem, 0.75vw, 0.62rem); color: rgba(200, 180, 140, 0.42);
+  padding: 0.3em 0; transition: color 0.35s ease;
+}
+.hold-hud__link:hover { color: rgba(232, 221, 196, 0.9); }
+
+.hold-hud__hint {
+  position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+}
+.hold-hud__hintline {
+  width: 1px; height: 34px;
+  background: linear-gradient(to bottom, rgba(150,190,185,0) 0%, rgba(150,190,185,0.4) 100%);
+}
+.hold-hud__hint span:last-child {
+  font-weight: 400; letter-spacing: 0.36em; text-indent: 0.36em;
+  text-transform: lowercase; font-size: clamp(0.46rem, 0.72vw, 0.6rem);
+  color: rgba(180, 170, 150, 0.4);
+}
+
+/* ─── Release bloom ───────────────────────────────────────────────────────────
+   The glow swell that masks the WebGL → document cut. Animated by GSAP. */
+.hold-bloom {
+  position: fixed; inset: 0; z-index: 40; pointer-events: none; opacity: 0;
+  transform-origin: 50% 46%;
+  background: radial-gradient(circle at 50% 46%,
+    rgba(190, 255, 240, 0.95) 0%,
+    rgba(80, 220, 200, 0.5) 22%,
+    rgba(8, 18, 20, 0) 62%);
+}
+
+/* ─── Dossier ─────────────────────────────────────────────────────────────── */
+.hold-dossier {
+  position: fixed; inset: 0; z-index: 30; background: #070809;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+.hold-dossier.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.hold-dossier__scroll {
+  height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 14vh 6vw 12vh;
+}
+.hold-dossier__head { max-width: 760px; margin: 0 auto 3rem; }
+.hold-dossier__kicker {
+  display: block; font-family: 'Bueno', sans-serif; font-weight: 400;
+  letter-spacing: 0.5em; text-transform: uppercase; font-size: 0.62rem;
+  color: rgba(150, 190, 185, 0.6); margin-bottom: 1.7em;
+}
+.hold-dossier h1 {
+  font-family: 'Bueno', Georgia, serif; font-weight: 200; text-transform: uppercase;
+  letter-spacing: 0.06em; line-height: 1.05;
+  font-size: clamp(2.2rem, 5vw, 4rem); color: rgba(238, 228, 202, 0.95);
+}
+.hold-dossier__meta {
+  font-family: 'Bueno', sans-serif; font-weight: 400; text-transform: uppercase;
+  letter-spacing: 0.28em; font-size: 0.6rem; color: rgba(180, 170, 150, 0.5);
+  margin-top: 1.4em;
+}
+.hold-dossier__hero {
+  max-width: 980px; height: 46vh; margin: 0 auto 4rem; border-radius: 2px;
+  background: linear-gradient(135deg, #e11d74 0%, #6c2bd9 46%, #16c2c8 100%);
+}
+.hold-dossier section { max-width: 680px; margin: 0 auto 3.4rem; }
+.hold-dossier__label {
+  display: block; font-family: 'Bueno', sans-serif; font-weight: 400;
+  letter-spacing: 0.42em; text-transform: uppercase; font-size: 0.58rem;
+  color: rgba(150, 190, 185, 0.55); margin-bottom: 1.4em; padding-bottom: 0.9em;
+  border-bottom: 1px solid rgba(150, 190, 185, 0.14);
+}
+.hold-dossier p {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.85;
+  color: rgba(220, 212, 198, 0.82); margin-bottom: 1.2em;
+}
+.hold-dossier__plate { height: 38vh; margin: 2rem 0; border-radius: 2px; }
+.hold-dossier__plate:nth-of-type(odd)  { background: linear-gradient(120deg, #1a2b33, #244b4f); }
+.hold-dossier__plate:nth-of-type(even) { background: linear-gradient(120deg, #3a1c2e, #7a2440); }
+.hold-dossier__foot {
+  max-width: 680px; margin: 4rem auto 0; display: flex;
+  justify-content: space-between; padding-top: 2rem;
+  border-top: 1px solid rgba(150, 190, 185, 0.14);
+}
+
+@media (max-width: 768px) {
+  .hold-dossier__scroll { padding: 12vh 7vw 12vh; }
+  .hold-hud__hint span:last-child { max-width: 70vw; text-align: center; }
+}

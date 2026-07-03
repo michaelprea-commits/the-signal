@@ -1,0 +1,174 @@
+# Decap CMS — visual editor for michaelreadesign.com's homepage + case-study
+# copy and images. Edits here write straight to src/content/*.json in this
+# repo, as real git commits — no separate database.
+#
+# ── BACKEND ──────────────────────────────────────────────────────────────
+# Set to git-gateway by default: if you deploy this site to Netlify, turn on
+# Site settings → Identity, then Identity → Services → Git Gateway, invite
+# yourself as a user, and this admin panel works with no further setup.
+#
+# If you deploy elsewhere (e.g. Vercel) and don't want a Netlify account just
+# for this, switch to the "github" backend instead:
+#   backend:
+#     name: github
+#     repo: <your-github-username>/railway-signal
+#     branch: main
+# ...but that route needs an OAuth app + a small auth proxy (Decap's docs
+# cover this under "GitHub backend"). Ask Claude to switch it over if you'd
+# rather go that way.
+#
+# To try the editor locally right now, with no auth setup at all, run
+# `npx decap-server` in one terminal and the dev server in another — edits
+# save straight to your local files.
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/hold"
+public_folder: "/hold"
+
+collections:
+  - name: "home"
+    label: "Homepage"
+    files:
+      - name: "home"
+        label: "Homepage content"
+        file: "src/content/home.json"
+        fields:
+          - label: "Intro"
+            name: intro
+            widget: object
+            fields:
+              - { label: "Name (2 lines)", name: name, widget: list }
+              - { label: "Roles / credentials (3 lines)", name: roles, widget: list }
+          - label: "Panels (the 6 ring slots, in order)"
+            name: panels
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Class / discipline tag", name: cls, widget: string }
+              - { label: "Eyebrow (site list)", name: tag, widget: string }
+              - { label: "Blurb", name: blurb, widget: text }
+              - { label: "Link label", name: more, widget: string }
+              - { label: "Link href", name: href, widget: string }
+              - { label: "Poster image", name: img, widget: file, media_folder: "public/hold", public_folder: "/hold" }
+              - { label: "Video (webm, optional)", name: video, widget: file, required: false, media_folder: "public/home", public_folder: "/home" }
+
+  - name: "cases"
+    label: "Case studies"
+    files:
+      - name: "forza"
+        label: "01 — Forza"
+        file: "src/content/cases/forza.json"
+        fields: &case_fields
+          - { label: "Slug (URL path)", name: slug, widget: string }
+          - { label: "Title", name: title, widget: string }
+          - { label: "Class / discipline tag", name: cls, widget: string }
+          - { label: "Accent colour", name: accent, widget: color }
+          - label: "Blocks (in page order)"
+            name: blocks
+            widget: list
+            summary: "{{fields.type}}"
+            types:
+              - label: "Hero"
+                name: hero
+                fields:
+                  - { label: "Eyebrow left", name: eyebrowLeft, widget: string }
+                  - { label: "Eyebrow right", name: eyebrowRight, widget: string }
+                  - { label: "Spine (vertical side label)", name: spine, widget: string, required: false }
+                  - { label: "Headline (one line each)", name: headline, widget: list }
+                  - { label: "Accent line (0-indexed)", name: accentLine, widget: number, value_type: int }
+                  - { label: "Subhead", name: subhead, widget: text }
+                  - { label: "Meta line", name: meta, widget: string }
+                  - { label: "Archive index (e.g. 01 / 08)", name: index, widget: string }
+              - label: "Reel (video, full-bleed)"
+                name: reel
+                fields:
+                  - { label: "Video file", name: src, widget: file }
+                  - { label: "Caption", name: caption, widget: string, required: false }
+              - label: "Fact sheet"
+                name: facts
+                fields:
+                  - label: "Rows"
+                    name: items
+                    widget: list
+                    fields:
+                      - { label: "Label", name: key, widget: string }
+                      - { label: "Value", name: value, widget: string }
+              - label: "Movement (a numbered section)"
+                name: movement
+                fields:
+                  - { label: "Number", name: num, widget: string, required: false }
+                  - { label: "Label", name: label, widget: string }
+                  - { label: "Heading (one line each)", name: heading, widget: list, required: false }
+                  - { label: "Paragraphs", name: paragraphs, widget: list }
+              - label: "Split (text + image)"
+                name: split
+                fields:
+                  - { label: "Image side", name: side, widget: select, options: ["left", "right"] }
+                  - { label: "Image", name: image, widget: file }
+                  - { label: "Text", name: text, widget: text }
+              - label: "Full-bleed image or video"
+                name: fullbleed
+                fields:
+                  - { label: "Image or video file", name: image, widget: file }
+                  - { label: "Caption", name: caption, widget: string, required: false }
+              - label: "Pull quote"
+                name: quote
+                fields:
+                  - { label: "Lines", name: lines, widget: list }
+              - label: "Statement (large centred line)"
+                name: statement
+                fields:
+                  - { label: "Lines", name: lines, widget: list }
+                  - { label: "Accent line (0-indexed)", name: accentLine, widget: number, value_type: int }
+              - label: "Gallery (3 images)"
+                name: gallery
+                fields:
+                  - { label: "Images", name: images, widget: list, field: { label: "Image", name: image, widget: file } }
+              - label: "Credits"
+                name: credits
+                fields:
+                  - label: "Rows"
+                    name: items
+                    widget: list
+                    fields:
+                      - { label: "Label", name: key, widget: string }
+                      - { label: "Value", name: value, widget: string }
+              - label: "Closing index (auto-fills — just edit the label/url)"
+                name: index
+                fields:
+                  - { label: "Label", name: label, widget: string }
+                  - { label: "URL shown", name: url, widget: string }
+                  - { label: "Archive index (e.g. 01 / 08)", name: index, widget: string }
+      - name: "turn10"
+        label: "02 — Turn 10 Studios"
+        file: "src/content/cases/turn10.json"
+        fields: *case_fields
+      - name: "studiotypes"
+        label: "03 — Studiotypes"
+        file: "src/content/cases/studiotypes.json"
+        fields: *case_fields
+      - name: "chaos-gate"
+        label: "04 — Chaos Gate"
+        file: "src/content/cases/chaos-gate.json"
+        fields: *case_fields
+      - name: "illustration"
+        label: "05 — Illustration"
+        file: "src/content/cases/illustration.json"
+        fields: *case_fields
+      - name: "animation"
+        label: "06 — Animation"
+        file: "src/content/cases/animation.json"
+        fields: *case_fields
+      - name: "battle-road"
+        label: "07 — Battle Road"
+        file: "src/content/cases/battle-road.json"
+        fields: *case_fields
+      - name: "hey-bird"
+        label: "08 — Hey Bird!"
+        file: "src/content/cases/hey-bird.json"
+        fields: *case_fields

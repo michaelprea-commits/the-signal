@@ -1,0 +1,77 @@
+{
+  "slug": "illustration",
+  "title": "Illustration",
+  "cls": "Illustration & 3D",
+  "accent": "#c6f23c",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrowLeft": "Illustration",
+      "eyebrowRight": "Illustration & 3D",
+      "spine": "Michael Rea · Selected work",
+      "headline": ["Story.", "Pace.", "Image."],
+      "accentLine": 2,
+      "subhead": "Illustration has always sat at the centre of how I think visually, from comics and editorial through to 3D and record covers.",
+      "meta": "Comics · Editorial · 3D · Covers",
+      "index": "05 / 08"
+    },
+    { "type": "fullbleed", "image": "/hold/illustration/hero.webp", "caption": "Illustration." },
+    {
+      "type": "facts",
+      "items": [
+        { "key": "Clients", "value": "Marvel · Image · IBM · Microsoft" },
+        { "key": "Disciplines", "value": "Comics · Editorial · 3D · Covers" },
+        { "key": "Role", "value": "Illustration & art direction" },
+        { "key": "Medium", "value": "Ink · digital · vector" }
+      ]
+    },
+    {
+      "type": "movement",
+      "num": "01",
+      "label": "Where it started",
+      "heading": ["Built on", "comics."],
+      "paragraphs": [
+        "I grew up on comics, and studied them rather more closely than most readers might. How panels guide the eye, how poses carry story, how colour and contrast make drama. That obsession became a degree in Illustration, with a dissertation on the language of comics and how images tell stories, sometimes without a word."
+      ]
+    },
+    {
+      "type": "split",
+      "side": "right",
+      "image": "/hold/illustration/02.webp",
+      "text": "It turns out the skill travels. Graphic design, animation, branding and UI all rely on the same ideas: clarity, pacing, and making something instantly readable."
+    },
+    {
+      "type": "movement",
+      "num": "02",
+      "label": "Range",
+      "heading": ["The skill", "travels."],
+      "paragraphs": [
+        "Over the years that thinking has gone to work for Marvel, Image Comics, IBM and Microsoft.",
+        "I’ve also drawn portraits for Prospect Magazine, some of the biggest names in politics and culture. Editorial moves quickly and the deadlines are tight, so you learn to catch a personality without overworking the image."
+      ]
+    },
+    { "type": "statement", "lines": ["Twenty years of", "visual", "storytelling."], "accentLine": 2 },
+    { "type": "fullbleed", "image": "/hold/illustration/03.webp", "caption": "Editorial portraiture for Prospect Magazine." },
+    {
+      "type": "movement",
+      "num": "03",
+      "label": "Into 3D",
+      "heading": ["Lit like a", "film set."],
+      "paragraphs": [
+        "More recently, illustration has moved into 3D. Building a scene that way means I can light it like a film set, control the camera and shape the atmosphere with real precision, illustration borrowing happily from filmmaking.",
+        "Record covers are where things loosen up. Album artwork sets the mood before anyone presses play, so type, colour and composition get to hint at the sound. I treat each one as a tiny world-building exercise."
+      ]
+    },
+    { "type": "quote", "lines": ["One image that tells you", "what you’re", "about to hear."] },
+    { "type": "gallery", "images": ["/hold/illustration/04.webp", "/hold/illustration/05.webp", "/hold/illustration/06.webp"] },
+    {
+      "type": "credits",
+      "items": [
+        { "key": "Clients", "value": "Marvel · Image Comics · IBM · Microsoft · Prospect" },
+        { "key": "Role", "value": "Illustration, 3D, art direction" },
+        { "key": "Medium", "value": "Ink · digital · vector" }
+      ]
+    },
+    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "05 / 08" }
+  ]
+}

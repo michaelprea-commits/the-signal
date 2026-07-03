@@ -1,0 +1,68 @@
+{
+  "intro": {
+    "name": ["Michael", "Rea"],
+    "roles": ["Creative Director & Brand Designer", "Brand · Interactive · Motion · 3D", "Xbox · Tencent · Marvel · Warhammer · AMD"]
+  },
+  "panels": [
+    {
+      "title": "Game Websites",
+      "cls": "Game websites",
+      "tag": "forza.net · deceiveinc.com · splitgate.com",
+      "blurb": "Launch sites for games with millions of players waiting on them. Forza for Turn 10 and Playground Games, Deceive Inc. and Rogue Waters for Tripwire, Splitgate 2 for 1047. The site is the lobby before the lobby, and it tends to deserve the same care as the game.",
+      "more": "View the Forza case study",
+      "href": "/work/forza",
+      "img": "/hold/forza/02.webp",
+      "video": "/home/game-websites.webm"
+    },
+    {
+      "title": "Studio Websites",
+      "cls": "Studio websites",
+      "tag": "lightspeed.la · turn10studios.com · compulsiongames.com",
+      "blurb": "Homes on the web for the teams behind the games. Lightspeed LA for Tencent, Turn 10 and Compulsion for Xbox, with Playground, Fast Travel, Invoke, FunPlus and Hundred Star alongside. Part brand, part recruitment, and quietly my favourite kind of brief.",
+      "more": "View the Turn 10 case study",
+      "href": "/work/turn-10",
+      "img": "/hold/turn10/01.webp",
+      "video": "/home/studios.webm"
+    },
+    {
+      "title": "Brand & Identity",
+      "cls": "Brand & identity",
+      "tag": "studiotypes.com · enginefall.com · battleroad.digital",
+      "blurb": "Identities with a proper system behind them, for studios and start-ups across games and tech. Studiotypes, Enginefall, Battle Road, Atom Engine and Hey Bird!, plus a mark for NetEase's Worlds Untold. The briefs I enjoy most tend to start with an idea and let the logo follow.",
+      "more": "View the Studiotypes case study",
+      "href": "/work/studiotypes",
+      "img": "/hold/studiotypes/02.webp",
+      "video": "/home/brand.webm"
+    },
+    {
+      "title": "Key Art",
+      "cls": "Key art direction",
+      "tag": "Warhammer 40,000: Chaos Gate – Deathwatch",
+      "blurb": "Identity and creative direction for Chaos Gate: Deathwatch, with Frontier and Other Things. Warhammer arrives with forty millennia of lore, a famously devoted fanbase and some very firm rules, which made for a properly rewarding brief.",
+      "more": "View the Chaos Gate case study",
+      "href": "/work/chaos-gate",
+      "img": "/hold/chaos-gate/01.webp",
+      "video": "/home/chaos-gate.webm"
+    },
+    {
+      "title": "Illustration",
+      "cls": "Illustration & 3D",
+      "tag": "Marvel · Image Comics · Prospect",
+      "blurb": "Illustration is the constant running under everything, twenty years of it, for Marvel, Image Comics, IBM and Prospect Magazine. It has a habit of sneaking into the client work too, which I suspect is rather the point.",
+      "more": "View the Illustration work",
+      "href": "/work/illustration",
+      "img": "/hold/illustration/ring.webp",
+      "video": ""
+    },
+    {
+      "title": "Animation",
+      "cls": "Motion & 3D",
+      "tag": "AMD · APX · Tezotopia",
+      "blurb": "Motion and 3D across trailers, brand films and real-time WebGL, including creative direction for AMD. I like movement that feels like it belongs to the brand, and it tends to come out a little calmer than the brief first asks for.",
+      "more": "View the Animation work",
+      "href": "/work/animation",
+      "img": "/hold/animation/amd.jpg",
+      "video": "/hold/animation/hero.webm"
+    }
+  ]
+}

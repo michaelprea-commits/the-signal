@@ -24,9 +24,40 @@
   font-style: normal;
   font-display: swap;
 }
+/* Inter — self-hosted variable font (body voice across home + case studies),
+   replacing the Google Fonts link so the build has no external dependency. */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ─── Reset ─────────────────────────────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* shared tokens + craft details */
+:root { --mono: ui-monospace, 'SF Mono', 'Geist Mono', Menlo, Consolas, monospace; }
+::selection { background: #c6f23c; color: #141414; }
+
+/* ─── Shared atmospheric background ──────────────────────────────────────────── */
+/* A near-black graded void with a slow-drifting glow. Sits behind the 3D on the
+   homepage (transparent canvas) and behind the parallaxing content on case
+   studies. Vignette + grain are applied per-page over the top. */
+.atmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: #060608; overflow: hidden; }
+.atmos__glow {
+  position: absolute; inset: -18%;
+  background:
+    radial-gradient(55% 45% at 50% 16%, rgba(150, 162, 185, 0.10), transparent 60%),
+    radial-gradient(45% 45% at 82% 78%, rgba(96, 116, 150, 0.10), transparent 64%),
+    radial-gradient(42% 42% at 16% 72%, rgba(150, 110, 80, 0.06), transparent 64%);
+  animation: atmos-drift 34s ease-in-out infinite alternate;
+}
+@keyframes atmos-drift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1.05); }
+  to   { transform: translate3d(3%, 2.5%, 0) scale(1.13); }
+}
 
 /* ─── Scroll structure ───────────────────────────────────────────────────────── */
 html, body {

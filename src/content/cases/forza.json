@@ -1,0 +1,76 @@
+{
+  "slug": "forza",
+  "title": "Forza",
+  "cls": "Game websites",
+  "accent": "#c6f23c",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrowLeft": "Forza · forza.net",
+      "eyebrowRight": "Game websites",
+      "spine": "Michael Rea · Selected work",
+      "headline": ["Cars.", "Community.", "Creativity."],
+      "accentLine": 2,
+      "subhead": "The web home of the Forza franchise, for Turn 10 and Playground Games. Millions of players pass through it on their way to Motorsport and Horizon, which tends to focus the mind.",
+      "meta": "Web design & art direction · Xbox",
+      "index": "01 / 08"
+    },
+    { "type": "reel", "src": "/hold/forza/hero.webm", "caption": "forza.net, the franchise hub." },
+    {
+      "type": "facts",
+      "items": [
+        { "key": "Client", "value": "Turn 10 · Playground Games" },
+        { "key": "Platform", "value": "forza.net" },
+        { "key": "Role", "value": "Web design & art direction" },
+        { "key": "Output", "value": "Franchise hub & editorial system" }
+      ]
+    },
+    {
+      "type": "movement",
+      "num": "01",
+      "label": "The brief",
+      "heading": ["Two series,", "one home."],
+      "paragraphs": [
+        "Forza is two flagship series and one very devoted community, so the site works as a franchise hub first. News, updates, car reveals and community programmes for Motorsport and Horizon alike, and it needed to feel like Forza before a single word is read."
+      ]
+    },
+    {
+      "type": "split",
+      "side": "right",
+      "image": "/hold/forza/02.webp",
+      "text": "Speed matters twice over here. The pages had to load quickly for a global audience, and the design had to feel quick standing still, all forward lean and racing lines borrowed from the games themselves."
+    },
+    { "type": "quote", "lines": ["The lobby", "before", "the lobby."] },
+    { "type": "fullbleed", "image": "/hold/forza/03.webp", "caption": "An editorial system tuned for reveals, seasons and patch notes alike." },
+    {
+      "type": "movement",
+      "num": "02",
+      "label": "The system",
+      "heading": ["Editorial,", "engineered."],
+      "paragraphs": [
+        "The answer was an editorial system rather than a launch page. Modular components handle everything from cover reveals to patch notes, with the car photography doing the heavy lifting and the typography knowing when to step aside.",
+        "It had to hold up on a phone at a bus stop just as well as on an ultrawide, so the grid flexes generously and the type scale stays disciplined throughout."
+      ]
+    },
+    { "type": "gallery", "images": ["/hold/forza/04.webp", "/hold/forza/05.webp", "/hold/forza/06.webp"] },
+    { "type": "statement", "lines": ["One home for", "two racing", "franchises."], "accentLine": 2 },
+    {
+      "type": "movement",
+      "num": "03",
+      "label": "In the wild",
+      "heading": ["Racing’s", "front door."],
+      "paragraphs": [
+        "The site serves one of racing’s biggest communities day to day, quietly flexing between seasons, launches and events. Of all the work at this scale, Forza is the one I still check in on like an old colleague."
+      ]
+    },
+    {
+      "type": "credits",
+      "items": [
+        { "key": "Client", "value": "Turn 10 Studios · Playground Games · Xbox" },
+        { "key": "Role", "value": "Web design & art direction" },
+        { "key": "Disciplines", "value": "Web · editorial · motion" }
+      ]
+    },
+    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "01 / 08" }
+  ]
+}

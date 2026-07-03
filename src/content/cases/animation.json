@@ -1,0 +1,83 @@
+{
+  "slug": "animation",
+  "title": "Animation",
+  "cls": "Motion & 3D",
+  "accent": "#c6f23c",
+  "blocks": [
+    {
+      "type": "hero",
+      "eyebrowLeft": "Animation",
+      "eyebrowRight": "Motion & 3D",
+      "spine": "Michael Rea · Selected work",
+      "headline": ["Motion", "with", "intent."],
+      "accentLine": 2,
+      "subhead": "Five years building digital experiences for gaming’s biggest names, with motion at the centre. Motion graphics, 3D and WebGL that look good and run smoothly where it counts.",
+      "meta": "Motion graphics · 3D · WebGL",
+      "index": "06 / 08"
+    },
+    { "type": "reel", "src": "/hold/animation/hero.webm", "caption": "Showreel." },
+    {
+      "type": "facts",
+      "items": [
+        { "key": "Clients", "value": "APX · AMD · Tezotopia · 1minus1" },
+        { "key": "Disciplines", "value": "Motion · 3D · WebGL" },
+        { "key": "Role", "value": "Art direction & animation" },
+        { "key": "Output", "value": "Trailers · real-time · motion graphics" }
+      ]
+    },
+    {
+      "type": "movement",
+      "num": "01",
+      "label": "The practice",
+      "heading": ["Motion at the", "centre."],
+      "paragraphs": [
+        "Over the past five years I’ve worked with some of gaming’s most high-profile clients on experiences where motion carries the story. Along the way that has meant motion graphics, 3D modelling and WebGL production, and learning to make work that behaves itself in real-world conditions."
+      ]
+    },
+    { "type": "fullbleed", "image": "/hold/animation/02.webm", "caption": "Motion study." },
+    {
+      "type": "movement",
+      "num": "02",
+      "label": "APX",
+      "heading": ["Precise,", "grounded."],
+      "paragraphs": [
+        "Recent work for APX focused on motion that felt precise, confident and technologically grounded. Animation there is a way of guiding attention, reinforcing the brand and lending the product a sense of momentum."
+      ]
+    },
+    { "type": "fullbleed", "image": "/hold/animation/03.webm", "caption": "APX, motion in the brand system." },
+    { "type": "quote", "lines": ["Animation as a way", "to guide", "attention."] },
+    {
+      "type": "movement",
+      "num": "03",
+      "label": "Real-time",
+      "heading": ["Optimised for", "the browser."],
+      "paragraphs": [
+        "Outside client work, Blender is my playground. Sci-fi studies exploring lighting, atmosphere and cinematic framing, testing scale, mood and storytelling.",
+        "Other models are built specifically for real-time web performance, geometry optimised, vertex counts reduced, textures compressed with care so load times stay quick and the image stays sharp."
+      ]
+    },
+    { "type": "fullbleed", "image": "/hold/animation/04.webm", "caption": "Real-time studies, built for the browser." },
+    { "type": "statement", "lines": ["Motion designed", "to serve", "the brand."], "accentLine": 2 },
+    {
+      "type": "movement",
+      "num": "04",
+      "label": "Direction",
+      "heading": ["Concept to", "delivery."],
+      "paragraphs": [
+        "For the Tezotopia trailer I led art direction and momentum, guiding external animators, shaping pacing and consistency, and assembling sound and music to give the piece weight.",
+        "For AMD I led creative direction from concept sketches to final delivery, able to make informed calls early thanks to a working understanding of 3D constraints and pipelines."
+      ]
+    },
+    { "type": "fullbleed", "image": "/hold/animation/05.webm", "caption": "The Tezotopia trailer." },
+    { "type": "fullbleed", "image": "/hold/animation/06.webm", "caption": "The AMD trailer, concept to delivery." },
+    {
+      "type": "credits",
+      "items": [
+        { "key": "Clients", "value": "APX · AMD · Tezotopia · 1minus1" },
+        { "key": "Role", "value": "Art direction, motion, 3D" },
+        { "key": "Disciplines", "value": "Motion · 3D · WebGL" }
+      ]
+    },
+    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "06 / 08" }
+  ]
+}

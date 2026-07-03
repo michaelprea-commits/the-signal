@@ -1,0 +1,114 @@
+/* michaelreadesign.com homepage — R3F curved video wall (HomeScene) under a
+   Bueno overlay. Same voice as the case studies: lime on charcoal, grain,
+   radial vignette over the 3D. */
+
+@font-face { font-family: 'Bueno'; src: url('/fonts/Bueno-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bueno'; src: url('/fonts/Bueno-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+
+.home {
+  --accent: #c6f23c;
+  --ink: #f2f1ea;
+  --dim: rgba(242, 241, 234, 0.5);
+  --line: rgba(242, 241, 234, 0.14);
+  --mono: ui-monospace, 'SF Mono', 'Geist Mono', Menlo, Consolas, monospace;
+  --gut: 4vw;
+  position: relative; isolation: isolate;
+  background: #0c0c0e;
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* fixed 3D canvas — held dark until the loader hands off (.is-live) */
+.home-canvas { position: fixed; inset: 0; z-index: 1; opacity: 0; }
+.home.is-live .home-canvas { animation: home-fade 1.5s ease 0.1s both; }
+@keyframes home-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── loader — charcoal room, mono metadata, monument counter ── */
+.home-loader {
+  position: fixed; inset: 0; z-index: 30;
+  background: #0c0c0e;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 3.2vh var(--gut) 4vh;
+  clip-path: inset(0% 0% 0% 0%);
+}
+.home-loader::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.09; mix-blend-mode: soft-light; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px 200px; }
+.home-loader__head, .home-loader__foot { display: flex; justify-content: space-between; gap: 2rem; }
+.home-loader__head span, .home-loader__foot span { font-family: var(--mono); font-weight: 400; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.62rem; color: var(--dim); }
+.home-loader__count { overflow: hidden; align-self: flex-start; margin-top: auto; padding: 0.18em 0.05em 0.08em; margin-bottom: -0.08em; }
+.home-loader__count span { display: block; font-family: 'Bueno', sans-serif; font-weight: 700; line-height: 0.8; letter-spacing: -0.015em; font-size: clamp(6rem, 20vw, 17rem); color: var(--ink); font-variant-numeric: tabular-nums; }
+.home-loader__bar { height: 1px; background: var(--line); margin: 2.2rem 0 1.6rem; }
+.home-loader__bar i { display: block; height: 100%; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; }
+/* keep the video-texture <video> elements out of the DOM view (no stray controls) */
+.home video { position: fixed; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; z-index: -1; }
+
+/* grain + vignette over the 3D */
+.home::before { content: ''; position: fixed; inset: 0; z-index: 6; pointer-events: none; background: radial-gradient(118% 112% at 50% 40%, transparent 32%, rgba(0,0,0,0.82) 100%); }
+.home::after { content: ''; position: fixed; inset: 0; z-index: 7; pointer-events: none; opacity: 0.1; mix-blend-mode: soft-light; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px 200px; }
+
+/* ── depth of field — progressive blur bands over the 3D (tilt-shift) ── */
+.home-blur { position: fixed; left: 0; right: 0; z-index: 4; pointer-events: none; backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px); }
+.home-blur--top { top: 0; height: 16vh; mask-image: linear-gradient(to bottom, black 20%, transparent); -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent); }
+.home-blur--bot { bottom: 0; height: 20vh; mask-image: linear-gradient(to top, black 15%, transparent); -webkit-mask-image: linear-gradient(to top, black 15%, transparent); }
+
+/* ── overlay UI ── */
+.home-ui { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
+
+/* availability status — quiet mono, pulsing lime dot */
+.home-status { position: absolute; top: 3.2vh; right: var(--gut); display: flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.62rem; color: var(--dim); }
+.home-status i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: status-pulse 2.6s ease-in-out infinite; }
+@keyframes status-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.72); } }
+
+.home-hero { position: absolute; top: 4vh; left: var(--gut); will-change: opacity, transform; }
+.home-hero__line { overflow: hidden; padding: 0.32em 0.08em 0.24em; margin: -0.32em -0.08em -0.2em; }
+.home-hero h1 { font-family: 'Bueno', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.015em; line-height: 0.82; font-size: clamp(3.4rem, 13vw, 13rem); color: var(--ink); transform: translateY(108%); }
+.home.is-live .home-hero h1 { animation: home-line-up 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+@keyframes home-line-up { from { transform: translateY(108%); } to { transform: translateY(0); } }
+.home-hero__roles { margin-top: 1.7rem; }
+.home-hero__roles span { display: block; font-family: var(--mono); font-weight: 400; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; line-height: 1.75; color: var(--dim); }
+
+.home-active { position: absolute; left: var(--gut); bottom: 5vh; max-width: 38ch; opacity: 0; will-change: opacity, transform; }
+.home-active__index { display: flex; align-items: center; gap: 0.7rem; font-family: var(--mono); font-weight: 500; letter-spacing: 0.08em; font-size: 0.7rem; color: var(--accent); margin-bottom: 0.9rem; font-variant-numeric: tabular-nums; }
+.home-active__index::before { content: ''; width: 1.8rem; height: 1px; background: var(--accent); }
+.home-active__name { font-family: 'Bueno', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.012em; line-height: 0.94; font-size: clamp(1.8rem, 4.4vw, 3.4rem); color: var(--ink); display: block; }
+.home-active__cls { display: block; margin-top: 0.7rem; font-family: var(--mono); font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.64rem; color: var(--dim); }
+.home-active__blurb { margin-top: 1.1rem; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.82rem; line-height: 1.6; color: rgba(242, 241, 234, 0.62); max-width: 34ch; }
+.home-active__more { display: inline-block; margin-top: 1.2rem; font-family: var(--mono); font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.64rem; color: var(--accent); transition: letter-spacing 0.3s ease; }
+.home-active:hover .home-active__more { letter-spacing: 0.18em; }
+.home-active__name .ch, .home-active__blurb .wd { display: inline-block; will-change: transform, opacity; }
+.home-active__blurb .wd { margin-right: 0.26em; }
+
+.home-touch { position: absolute; right: var(--gut); bottom: 5vh; pointer-events: auto; display: inline-flex; align-items: center; gap: 0.7rem; background: var(--accent); color: #141414; font-family: var(--mono); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.68rem; padding: 0.95rem 1.4rem; text-decoration: none; transition: transform 0.3s ease, letter-spacing 0.3s ease; }
+.home-touch:hover { transform: translateY(-2px); letter-spacing: 0.18em; }
+
+/* scroll cue — centred hairline + mono microcopy (clear of the lockup) */
+.home-cue { position: absolute; left: 50%; bottom: 3.4vh; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.7rem; will-change: opacity; }
+.home-cue span { font-family: var(--mono); font-weight: 400; letter-spacing: 0.3em; text-indent: 0.3em; text-transform: uppercase; font-size: 0.56rem; color: var(--dim); }
+.home-cue i { display: block; width: 1px; height: 34px; background: linear-gradient(to bottom, transparent, var(--dim)); animation: cue-drop 2.2s ease-in-out infinite; }
+@keyframes cue-drop { 0% { transform: scaleY(0); transform-origin: top; } 45% { transform: scaleY(1); transform-origin: top; } 55% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+.home-driver { height: 620vh; width: 100%; pointer-events: none; }
+
+/* reduced motion — hold the composition, drop the choreography */
+@media (prefers-reduced-motion: reduce) {
+  .home-canvas, .home.is-live .home-canvas, .home-hero h1, .home.is-live .home-hero h1 { animation: none; opacity: 1; transform: none; }
+  .atmos__glow { animation: none; }
+  .home-cue i { animation: none; }
+  .home-status i { animation: none; }
+  .home-loader { display: none; }
+}
+
+@media (max-width: 600px) {
+  .home-hero h1 { font-size: clamp(2.8rem, 17vw, 6rem); }
+  /* stack the bottom zone: lockup lives above the CTA, nothing overlaps */
+  .home-active { bottom: 13vh; max-width: 88vw; }
+  .home-active__name { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+  .home-active__cls { white-space: normal; line-height: 1.6; }
+  .home-active__blurb { display: none; }
+  .home-active__more { margin-top: 0.9rem; }
+  .home-touch { bottom: 3.5vh; padding: 0.8rem 1.1rem; font-size: 0.62rem; }
+  .home-cue { display: none; }
+  .home-status { font-size: 0.56rem; letter-spacing: 0.08em; }
+  .home-loader__foot { flex-wrap: wrap; gap: 0.5rem 1.4rem; }
+}
