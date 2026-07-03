@@ -22,7 +22,7 @@
         { "key": "Client", "value": "Battle Road" },
         { "key": "Disciplines", "value": "Brand · 3D · Guidelines" },
         { "key": "Role", "value": "Design & art direction" },
-        { "key": "Output", "value": "Identity & brand guidelines" }
+        { "key": "Output", "value": "Identity, guidelines & stand design" }
       ]
     },
     {
@@ -64,6 +64,21 @@
       ]
     },
     { "type": "gallery", "images": ["/hold/battle-road/03.webp", "/hold/battle-road/04.webp", "/hold/battle-road/05.webp"] },
+    {
+      "type": "fullbleed",
+      "image": "/hold/battle-road/itsec-stand.webm",
+      "caption": "The identity, built out in 3D for Battle Road's stand at I/ITSEC, the defence simulation industry's largest annual event."
+    },
+    {
+      "type": "movement",
+      "num": "04",
+      "label": "Where it landed",
+      "heading": ["A quiet startup,", "no longer quiet."],
+      "paragraphs": [
+        "Wargaming and defence simulation is a staid market, thick with grey vendor logos and government-issue PDFs. A brand built with real presence, on the show floor at I/ITSEC and everywhere else it showed up, gave Battle Road a way to stand out from that crowd and be taken seriously at the same time.",
+        "In January 2026, Battle Road was acquired by OneBrief in a deal announced alongside a $2.15 billion Series D. OneBrief's own announcement called Battle Road's wargaming software \"in broad use across the U.S. and allied militaries\" and cited its selection as the core simulation engine for the US Army's Next Generation Constructive programme, a rare position for a seed-stage startup to hold."
+      ]
+    },
     {
       "type": "credits",
       "items": [
