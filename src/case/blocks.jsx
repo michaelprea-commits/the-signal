@@ -150,6 +150,19 @@ function Quote({ b }) {
   )
 }
 
+function Testimonial({ b }) {
+  return (
+    <section className="testimonial">
+      <blockquote data-reveal="lines">“{b.quote}”</blockquote>
+      <footer data-reveal="fade">
+        <span className="testimonial__name">{b.name}</span>
+        {b.role && <span className="testimonial__role">{b.role}</span>}
+        {b.source && <span className="testimonial__source">{b.source}</span>}
+      </footer>
+    </section>
+  )
+}
+
 function Gallery({ b }) {
   return (
     <section className="gallery">
@@ -207,6 +220,7 @@ export function Block({ block }) {
     case 'statement': return <Statement b={block} />
     case 'next':      return <NextCase b={block} />
     case 'quote':     return <Quote b={block} />
+    case 'testimonial': return <Testimonial b={block} />
     case 'gallery':   return <Gallery b={block} />
     case 'credits':   return <Credits b={block} />
     case 'index':     return <CaseIndex b={block} />

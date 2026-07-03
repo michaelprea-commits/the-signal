@@ -153,6 +153,16 @@ html.lenis, html.lenis body { height: auto; }
 .quote__line { font-family: 'Bueno', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.008em; line-height: 1.0; font-size: clamp(1.6rem, 4.2vw, 3.6rem); color: var(--ink); }
 
 /* ─ gallery (asymmetric) ─ */
+/* ─ testimonial — someone else's voice, so it never borrows Bueno (that's
+   reserved for Michael's own lines). Inter for the quote, mono for the
+   citation, quiet enough to read as evidence rather than a manifesto. ─ */
+.testimonial { display: grid; grid-template-columns: repeat(12, 1fr); max-width: 1320px; margin: 0 auto; padding: clamp(4rem, 9vh, 7rem) var(--gut); border-top: 1px solid var(--line); }
+.testimonial blockquote { grid-column: 4 / 12; font-family: 'Inter', sans-serif; font-weight: 400; font-style: italic; font-size: clamp(1.1rem, 1.8vw, 1.55rem); line-height: 1.5; color: var(--ink-soft); max-width: 42ch; }
+.testimonial footer { grid-column: 4 / 12; margin-top: 1.6rem; display: flex; align-items: baseline; gap: 0.9rem; flex-wrap: wrap; }
+.testimonial__name { font-family: var(--mono); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; color: var(--ink); }
+.testimonial__role, .testimonial__source { font-family: var(--mono); font-weight: 400; font-size: 0.68rem; color: var(--dim); }
+.testimonial__role::before, .testimonial__source::before { content: '·'; margin-right: 0.9rem; color: var(--line); }
+
 .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(1rem, 2vw, 1.6rem); max-width: 1320px; margin: 0 auto; padding: var(--section) var(--gut); }
 .gallery__item { margin: 0; position: relative; overflow: hidden; }
 .gallery__item:nth-child(3n+1) { grid-column: 1 / 8; height: 46vh; }
@@ -175,7 +185,8 @@ html.lenis, html.lenis body { height: auto; }
 .case-url { display: inline-block; background: var(--accent); color: #141414; font-family: 'Bueno', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.005em; font-size: clamp(1.05rem, 2.2vw, 1.8rem); padding: 0.5rem 0.85rem 0.4rem; text-decoration: none; }
 
 @media (max-width: 820px) {
-  .movement, .split, .gallery, .credits, .quote { grid-template-columns: 1fr; }
+  .movement, .split, .gallery, .credits, .quote, .testimonial { grid-template-columns: 1fr; }
+  .testimonial blockquote, .testimonial footer { grid-column: 1 / -1; }
   .facts { grid-template-columns: repeat(2, 1fr); }
   .movement__label { position: static; }
   .movement__label, .movement__heading, .movement__body, .split__text, .split__media,

@@ -65,6 +65,13 @@
       ]
     },
     {
+      "type": "testimonial",
+      "quote": "Michael is one of my very favourite people I have ever worked with. He is talented, kind, and puts his all into everything he focuses on. His enthusiasm for the new, to innovate, and his ability to take feedback on board in a way that just continually lifts his work up and up is really quite rare. I am absolutely convinced that he would make a fantastic addition to any design team.",
+      "name": "Jonathan Hill",
+      "role": "Head of 1minus1 — managed Michael directly",
+      "source": "LinkedIn recommendation, Aug 2025"
+    },
+    {
       "type": "credits",
       "items": [
         { "key": "Client", "value": "Turn 10 Studios · Xbox Game Studios" },

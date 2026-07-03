@@ -64,6 +64,13 @@
       ]
     },
     {
+      "type": "testimonial",
+      "quote": "This screenshot looks absolutely phenomenal. The chaotic, fiery atmosphere perfectly captures the brutal essence of Warhammer. Can't wait to jump back in and test these new tactical options.",
+      "name": "Mababa",
+      "role": "@Bi_Mababa",
+      "source": "Public reply on X, May 2026"
+    },
+    {
       "type": "credits",
       "items": [
         { "key": "Client", "value": "Frontier Developments" },

@@ -121,6 +121,13 @@ collections:
                 name: quote
                 fields:
                   - { label: "Lines", name: lines, widget: list, field: { label: "Line", widget: string } }
+              - label: "Testimonial (someone else's words — a quote, recommendation or public reaction)"
+                name: testimonial
+                fields:
+                  - { label: "Quote", name: quote, widget: text }
+                  - { label: "Name", name: name, widget: string }
+                  - { label: "Role / relationship", name: role, widget: string, required: false }
+                  - { label: "Source (e.g. LinkedIn recommendation, X)", name: source, widget: string, required: false }
               - label: "Statement (large centred line)"
                 name: statement
                 fields:

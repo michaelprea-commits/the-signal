@@ -63,6 +63,13 @@
     },
     { "type": "gallery", "images": ["/hold/hey-bird/04.webp", "/hold/hey-bird/05.webp", "/hold/hey-bird/06.webp"] },
     {
+      "type": "testimonial",
+      "quote": "Michael was a pleasure to work with. He was consistently responsive, kept us in the loop at all times and delivered high quality work incredibly fast. You can immediately tell he is an experienced professional who knows his craft and how to collaborate effectively. I would not hesitate for a second to work with Michael again. Highly recommended, top work.",
+      "name": "Petr Skornok",
+      "role": "CEO / Producer, Hey Bird!",
+      "source": "LinkedIn recommendation, Jan 2026"
+    },
+    {
       "type": "credits",
       "items": [
         { "key": "Client", "value": "Hey Bird! (formerly Twin Petes)" },
