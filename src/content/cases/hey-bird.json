@@ -5,31 +5,54 @@
   "accent": "#c6f23c",
   "blocks": [
     {
-      "type": "hero",
-      "eyebrowLeft": "Hey Bird!",
-      "eyebrowRight": "Brand & identity",
-      "spine": "Michael Rea · Selected work",
-      "headline": ["Hello,", "HEY", "BIRD!"],
-      "accentLine": 2,
       "subhead": "A full rebrand for an independent games studio, formerly known as Twin Petes. New name, new identity, new site, and a voice confident enough to open with \"do not scroll.\"",
+      "spine": "Michael Rea · Selected work",
       "meta": "Brand identity & website · heybird.gg",
-      "index": "08 / 08"
+      "eyebrowLeft": "Hey Bird!",
+      "index": "08 / 08",
+      "eyebrowRight": "Brand & identity",
+      "headline": [
+        "Hello,",
+        "HEY",
+        "BIRD!"
+      ],
+      "type": "hero",
+      "accentLine": 2
     },
-    { "type": "fullbleed", "image": "/hold/hey-bird/hero.webp", "caption": "Hey Bird!" },
+    {
+      "type": "fullbleed",
+      "image": "/hold/hey-bird/hero.webp",
+      "caption": "Hey Bird!"
+    },
     {
       "type": "facts",
       "items": [
-        { "key": "Client", "value": "Hey Bird! (formerly Twin Petes)" },
-        { "key": "Disciplines", "value": "Brand · Web · Tone of voice" },
-        { "key": "Role", "value": "Brand identity, copy, web design" },
-        { "key": "Output", "value": "Identity, website & guidelines" }
+        {
+          "key": "Client",
+          "value": "Hey Bird! (formerly Twin Petes)"
+        },
+        {
+          "key": "Disciplines",
+          "value": "Brand · Web · Tone of voice"
+        },
+        {
+          "key": "Role",
+          "value": "Brand identity, copy, web design"
+        },
+        {
+          "key": "Output",
+          "value": "Identity, website & guidelines"
+        }
       ]
     },
     {
       "type": "movement",
       "num": "01",
       "label": "The brief",
-      "heading": ["A new name,", "a new start."],
+      "heading": [
+        "A new name,",
+        "a new start."
+      ],
       "paragraphs": [
         "The studio was rebranding entirely, new name, new identity, from a founding idea rather than a refresh. The brief covered the mark, the tone of voice and the copy alongside it, so the studio would sound like itself from the first line a visitor read."
       ]
@@ -38,36 +61,66 @@
       "type": "split",
       "side": "right",
       "image": "/hold/hey-bird/02.webp",
-      "text": "The wordmark sits inside a hand-drawn speech bubble, trailing from a bird’s beak, a shape playful enough to survive being reprinted in a dozen colourways without losing itself."
+      "text": "Ideas were tested. A smoking fish? Matchbook screenprint? Speech bubbles? Refined over weeks, slowly honing down to the right species of fish, the right expression, the right amount of weird.  "
     },
-    { "type": "quote", "lines": ["A studio that", "sounds like", "itself."] },
+    {
+      "type": "quote",
+      "lines": [
+        "A studio that",
+        "sounds like",
+        "itself."
+      ]
+    },
     {
       "type": "movement",
       "num": "02",
       "label": "The voice",
-      "heading": ["Studio humour,", "kept honest."],
+      "heading": [
+        "Studio humour,",
+        "kept honest."
+      ],
       "paragraphs": [
-        "The website carries the same voice as the mark. \"Do not scroll,\" a label reading \"for internal use only,\" a welcome that just says \"Welcome to the studio, pal.\" It reads like it was written by the studio, because the tone of voice was built alongside the visual identity, not bolted on after."
+        "The website carries the same voice as the brandmark. \"Do not scroll",
+        "\" a label reading \"for internal use only",
+        "\" a welcome that just says \"Welcome to the studio",
+        "pal.\" It reads like it was written by the studio",
+        "because the tone of voice was built alongside the visual identity",
+        "not bolted on after."
       ]
     },
-    { "type": "fullbleed", "image": "/hold/hey-bird/03.webm", "caption": "heybird.gg, in motion." },
-    { "type": "statement", "lines": ["One identity,", "built from a", "single idea."], "accentLine": 2 },
+    {
+      "type": "fullbleed",
+      "image": "/hold/hey-bird/03.webm",
+      "caption": "heybird.gg, in motion."
+    },
+    {
+      "type": "statement",
+      "lines": [
+        "One identity,",
+        "built from a",
+        "single idea."
+      ],
+      "accentLine": 2
+    },
     {
       "type": "movement",
       "num": "03",
       "label": "The result",
-      "heading": ["A studio brand", "that stuck."],
+      "heading": [
+        "A studio brand",
+        "that stuck."
+      ],
       "paragraphs": [
         "Hey Bird! launched with a complete identity, tone of voice guidelines and a website built to hold it, and it has stayed in active use since. A second engagement in early 2026 extended the visual system further, proof the studio kept reaching for it."
       ]
     },
-    { "type": "gallery", "images": ["/hold/hey-bird/04.webp", "/hold/hey-bird/05.webp", "/hold/hey-bird/06.webp"] },
     {
-      "type": "testimonial",
-      "quote": "We get so much positive feedback on our website, it's amazing. Some people who visited it told us later it's one of the best and most fun studio websites they've ever seen.",
-      "name": "Petr Skornok",
-      "role": "CEO / Producer, Hey Bird!",
-      "source": "Message to Michael, 2026"
+      "type": "gallery",
+      "images": [
+        "/hold/hey-bird/04.webp",
+        "/hold/hey-bird/05.webp",
+        "/hold/hey-bird/06.webp"
+      ]
     },
     {
       "type": "testimonial",
@@ -79,11 +132,25 @@
     {
       "type": "credits",
       "items": [
-        { "key": "Client", "value": "Hey Bird! (formerly Twin Petes)" },
-        { "key": "Role", "value": "Brand identity, tone of voice, web design" },
-        { "key": "Disciplines", "value": "Brand · web · copy" }
+        {
+          "key": "Client",
+          "value": "Hey Bird! (formerly Twin Petes)"
+        },
+        {
+          "key": "Role",
+          "value": "Brand identity, tone of voice, web design"
+        },
+        {
+          "key": "Disciplines",
+          "value": "Brand · web · copy"
+        }
       ]
     },
-    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "08 / 08" }
+    {
+      "type": "index",
+      "label": "More work",
+      "url": "michaelreadesign.com",
+      "index": "08 / 08"
+    }
   ]
 }
