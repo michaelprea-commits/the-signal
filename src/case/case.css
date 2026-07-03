@@ -148,6 +148,13 @@ html.lenis, html.lenis body { height: auto; }
 .fullbleed--square { width: min(76vw, 82vh); height: auto; aspect-ratio: 1 / 1; left: 50%; }
 .fullbleed--square figcaption { left: 0; bottom: -2.4rem; }
 
+/* ─ live canvas embed (an interactive scene, not a video) ─ */
+.canvas-embed { position: relative; width: 100vw; left: 50%; transform: translateX(-50%); height: 88vh; margin: var(--section) 0; background: #0a0a0a; }
+.canvas-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.canvas-embed figcaption { position: absolute; left: var(--gut); bottom: 1.8rem; z-index: 2; display: flex; align-items: baseline; gap: 1.2rem; }
+.canvas-embed__link { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); text-decoration: none; }
+.canvas-embed__link:hover { text-decoration: underline; }
+
 /* ─ pull-quote (grid-aligned to the body column; lime mark hangs into the gutter) ─ */
 .quote { display: grid; grid-template-columns: repeat(12, 1fr); max-width: 1320px; margin: 0 auto; padding: clamp(5rem, 11vh, 9rem) var(--gut); }
 .quote blockquote { grid-column: 4 / 12; position: relative; padding-left: clamp(1.4rem, 3.5vw, 3rem); }
@@ -198,6 +205,7 @@ html.lenis, html.lenis body { height: auto; }
   .split__media { height: 52vh; }
   .fullbleed { height: 60vh; }
   .fullbleed--square { width: 92vw; height: auto; aspect-ratio: 1 / 1; }
+  .canvas-embed { height: 60vh; }
   .reel { height: 54vh; }
   .next-case { min-height: 58vh; }
 }

@@ -102,6 +102,20 @@ function FullBleed({ b }) {
   )
 }
 
+function CanvasEmbed({ b }) {
+  return (
+    <figure className="canvas-embed">
+      <iframe src={b.src} title={b.caption || 'Live scene'} loading="lazy" />
+      {(b.caption || b.href) && (
+        <figcaption>
+          <Eyebrow tick data-reveal="fade">{b.caption}</Eyebrow>
+          {b.href && <a className="canvas-embed__link" href={b.href} target="_blank" rel="noreferrer">Open full screen ↗</a>}
+        </figcaption>
+      )}
+    </figure>
+  )
+}
+
 function Reel({ b }) {
   return (
     <figure className="reel">
@@ -216,6 +230,7 @@ export function Block({ block }) {
     case 'movement':  return <Movement b={block} />
     case 'split':     return <Split b={block} />
     case 'fullbleed': return <FullBleed b={block} />
+    case 'canvas':    return <CanvasEmbed b={block} />
     case 'reel':      return <Reel b={block} />
     case 'statement': return <Statement b={block} />
     case 'next':      return <NextCase b={block} />

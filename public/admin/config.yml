@@ -112,6 +112,12 @@ collections:
                   - { label: "Image side", name: side, widget: select, options: ["left", "right"] }
                   - { label: "Image", name: image, widget: file }
                   - { label: "Text", name: text, widget: text }
+              - label: "Live canvas embed (an interactive scene, e.g. The Signal)"
+                name: canvas
+                fields:
+                  - { label: "Embed URL (e.g. /signal)", name: src, widget: string }
+                  - { label: "Caption", name: caption, widget: string, required: false }
+                  - { label: "Full-screen link (optional, defaults to same URL)", name: href, widget: string, required: false }
               - label: "Full-bleed image or video"
                 name: fullbleed
                 fields:
