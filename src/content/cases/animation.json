@@ -19,7 +19,7 @@
     {
       "type": "facts",
       "items": [
-        { "key": "Clients", "value": "APX · AMD · Tezotopia · 1minus1" },
+        { "key": "Clients", "value": "APX · Tezotopia · 1minus1" },
         { "key": "Disciplines", "value": "Motion · 3D · WebGL" },
         { "key": "Role", "value": "Art direction & animation" },
         { "key": "Output", "value": "Trailers · real-time · motion graphics" }
@@ -34,7 +34,7 @@
         "Over the past five years I’ve worked with some of gaming’s most high-profile clients on experiences where motion carries the story. Along the way that has meant motion graphics, 3D modelling and WebGL production, and learning to make work that behaves itself in real-world conditions."
       ]
     },
-    { "type": "fullbleed", "image": "/hold/animation/02.webm", "caption": "Motion study." },
+    { "type": "fullbleed", "image": "/hold/animation/05.webm", "caption": "Motion study." },
     {
       "type": "movement",
       "num": "02",
@@ -65,15 +65,15 @@
       "heading": ["Concept to", "delivery."],
       "paragraphs": [
         "For the Tezotopia trailer I led art direction and momentum, guiding external animators, shaping pacing and consistency, and assembling sound and music to give the piece weight.",
-        "For AMD I led creative direction from concept sketches to final delivery, able to make informed calls early thanks to a working understanding of 3D constraints and pipelines."
+        "A second piece for APX took a CAD model and rebuilt it as a fully lit, textured 3D asset, then opened up the shell to reveal the engineering underneath, using motion to explain the product rather than just show it off."
       ]
     },
-    { "type": "fullbleed", "image": "/hold/animation/05.webm", "caption": "The Tezotopia trailer." },
-    { "type": "fullbleed", "image": "/hold/animation/06.webm", "caption": "The AMD trailer, concept to delivery." },
+    { "type": "fullbleed", "image": "/hold/animation/02.webm", "caption": "The Tezotopia trailer." },
+    { "type": "fullbleed", "image": "/hold/animation/06.webm", "caption": "APX, a CAD model textured, lit and opened up to show its workings." },
     {
       "type": "credits",
       "items": [
-        { "key": "Clients", "value": "APX · AMD · Tezotopia · 1minus1" },
+        { "key": "Clients", "value": "APX · Tezotopia · 1minus1" },
         { "key": "Role", "value": "Art direction, motion, 3D" },
         { "key": "Disciplines", "value": "Motion · 3D · WebGL" }
       ]
