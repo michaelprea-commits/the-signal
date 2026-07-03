@@ -149,7 +149,14 @@
       "Bash(curl -s http://localhost:5173/admin/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/admin/config.yml)",
       "Bash(curl -s http://localhost:5173/admin/index.html)",
-      "Bash(npm i *)"
+      "Bash(npm i *)",
+      "Bash(git push *)",
+      "Bash(ssh -T git@github.com -o ConnectTimeout=5 -o BatchMode=yes)",
+      "Bash(git ls-remote *)",
+      "Bash(curl -s https://michaelreadesign.netlify.app/admin/config.yml)",
+      "Bash(git fetch *)",
+      "Bash(git pull *)",
+      "Bash(git merge *)"
     ]
   }
 }

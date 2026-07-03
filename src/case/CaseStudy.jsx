@@ -74,8 +74,8 @@ export default function CaseStudy() {
           const img = frame.querySelector('img, video')
           reveal(frame, frame, { clipPath: 'inset(100% 0% 0% 0%)', duration: 1.4, ease: 'expo.out' }, 'top 86%')
           if (img) {
-            reveal(img, frame, { scale: 1.35, duration: 1.7, ease: 'expo.out' }, 'top 86%')
-            gsap.fromTo(img, { yPercent: -4 }, { yPercent: 4, ease: 'none', scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true } })
+            reveal(img, frame, { scale: 1.12, duration: 1.7, ease: 'expo.out' }, 'top 86%')
+            gsap.fromTo(img, { yPercent: -3 }, { yPercent: 3, ease: 'none', scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true } })
           }
         })
         // each gallery image drifts within its frame at a different rate, so
