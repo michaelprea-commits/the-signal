@@ -3,25 +3,26 @@
 # repo, as real git commits — no separate database.
 #
 # ── BACKEND ──────────────────────────────────────────────────────────────
-# Set to git-gateway by default: if you deploy this site to Netlify, turn on
-# Site settings → Identity, then Identity → Services → Git Gateway, invite
-# yourself as a user, and this admin panel works with no further setup.
-#
-# If you deploy elsewhere (e.g. Vercel) and don't want a Netlify account just
-# for this, switch to the "github" backend instead:
-#   backend:
-#     name: github
-#     repo: <your-github-username>/railway-signal
-#     branch: main
-# ...but that route needs an OAuth app + a small auth proxy (Decap's docs
-# cover this under "GitHub backend"). Ask Claude to switch it over if you'd
-# rather go that way.
+# Netlify discontinued Identity + Git Gateway, so this uses the "github"
+# backend instead: log in with your GitHub account, Netlify's built-in OAuth
+# proxy (a separate, still-active service from Identity) handles the
+# handshake since this site is hosted on Netlify. One-time setup:
+#   1. github.com → Settings → Developer settings → OAuth Apps → New OAuth App
+#      Homepage URL:            https://michaelreadesign.netlify.app
+#      Authorization callback:  https://api.netlify.com/auth/done
+#   2. Copy the Client ID + generate a Client secret
+#   3. In Netlify: search your site settings for "OAuth" (sometimes under
+#      Project configuration → General, sometimes its own "Git-based OAuth"
+#      panel) and paste both in for provider "GitHub"
+# Once that's saved, /admin logs in via a normal GitHub sign-in button — no
+# password stored anywhere in this repo.
 #
 # To try the editor locally right now, with no auth setup at all, run
 # `npx decap-server` in one terminal and the dev server in another — edits
 # save straight to your local files.
 backend:
-  name: git-gateway
+  name: github
+  repo: michaelprea-commits/the-signal
   branch: main
 
 local_backend: true
