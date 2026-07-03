@@ -175,7 +175,7 @@ export default function HomeApp() {
         <div className="home-loader__bar"><i ref={lBar} /></div>
         <div className="home-loader__foot">
           <span>Loading selected work</span>
-          <span>Xbox · Tencent · Marvel · Warhammer · AMD</span>
+          <span>Xbox · Tencent · Marvel · Warhammer · IBM</span>
         </div>
       </div>
 

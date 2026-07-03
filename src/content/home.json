@@ -1,7 +1,7 @@
 {
   "intro": {
     "name": ["Michael", "Rea"],
-    "roles": ["Creative Director & Brand Designer", "Brand · Interactive · Motion · 3D", "Xbox · Tencent · Marvel · Warhammer · AMD"]
+    "roles": ["Creative Director & Brand Designer", "Brand · Interactive · Motion · 3D", "Xbox · Tencent · Marvel · Warhammer · IBM"]
   },
   "panels": [
     {
@@ -57,11 +57,11 @@
     {
       "title": "Animation",
       "cls": "Motion & 3D",
-      "tag": "AMD · APX · Tezotopia",
-      "blurb": "Motion and 3D across trailers, brand films and real-time WebGL, including creative direction for AMD. I like movement that feels like it belongs to the brand, and it tends to come out a little calmer than the brief first asks for.",
+      "tag": "APX · Tezotopia · 1minus1",
+      "blurb": "Motion and 3D across trailers, brand films and real-time WebGL. I like movement that feels like it belongs to the brand, and it tends to come out a little calmer than the brief first asks for.",
       "more": "View the Animation work",
       "href": "/work/animation",
-      "img": "/hold/animation/amd.jpg",
+      "img": "/hold/animation/motion-study-poster.webp",
       "video": "/hold/animation/hero.webm"
     }
   ]
