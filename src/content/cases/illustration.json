@@ -1,18 +1,18 @@
 {
   "slug": "illustration",
   "title": "Illustration",
-  "cls": "Illustration & 3D",
+  "cls": "Illustration",
   "accent": "#c6f23c",
   "blocks": [
     {
       "type": "hero",
       "eyebrowLeft": "Illustration",
-      "eyebrowRight": "Illustration & 3D",
+      "eyebrowRight": "Illustration",
       "spine": "Michael Rea · Selected work",
       "headline": ["Story.", "Pace.", "Image."],
       "accentLine": 2,
-      "subhead": "Illustration has always sat at the centre of how I think visually, from comics and editorial through to 3D and record covers.",
-      "meta": "Comics · Editorial · 3D · Covers",
+      "subhead": "Illustration has always sat at the centre of how I think visually, from comics and editorial through to album and comic-book covers.",
+      "meta": "Comics · Editorial · Covers",
       "index": "05 / 08"
     },
     { "type": "fullbleed", "image": "/hold/illustration/hero.webp", "caption": "Illustration." },
@@ -20,7 +20,7 @@
       "type": "facts",
       "items": [
         { "key": "Clients", "value": "Marvel · Image · IBM · Microsoft" },
-        { "key": "Disciplines", "value": "Comics · Editorial · 3D · Covers" },
+        { "key": "Disciplines", "value": "Comics · Editorial · Covers" },
         { "key": "Role", "value": "Illustration & art direction" },
         { "key": "Medium", "value": "Ink · digital · vector" }
       ]
@@ -47,7 +47,7 @@
       "heading": ["The skill", "travels."],
       "paragraphs": [
         "Over the years that thinking has gone to work for Marvel, Image Comics, IBM and Microsoft.",
-        "I’ve also drawn portraits for Prospect Magazine, some of the biggest names in politics and culture. Editorial moves quickly and the deadlines are tight, so you learn to catch a personality without overworking the image."
+        "I’ve also drawn portraits for Prospect Magazine, some of the biggest names in politics and culture, for their recurring Brief Encounter column. Editorial moves quickly and the deadlines are tight, so you learn to catch a personality without overworking the image."
       ]
     },
     { "type": "statement", "lines": ["Twenty years of", "visual", "storytelling."], "accentLine": 2 },
@@ -55,11 +55,11 @@
     {
       "type": "movement",
       "num": "03",
-      "label": "Into 3D",
-      "heading": ["Lit like a", "film set."],
+      "label": "Covers",
+      "heading": ["Loosened up,", "on purpose."],
       "paragraphs": [
-        "More recently, illustration has moved into 3D. Building a scene that way means I can light it like a film set, control the camera and shape the atmosphere with real precision, illustration borrowing happily from filmmaking.",
-        "Record covers are where things loosen up. Album artwork sets the mood before anyone presses play, so type, colour and composition get to hint at the sound. I treat each one as a tiny world-building exercise."
+        "Covers are where the work loosens up. Over the years I've contributed to dozens of album and comic covers, work that sits outside client briefs entirely, closer to poster illustration than design.",
+        "A record cover has to set the mood before anyone presses play, so type, colour and composition all get to hint at the sound. A comic cover has one job, to sell the issue in half a second on a shelf. Both are a tiny world-building exercise, and both let me push further than most commercial work allows."
       ]
     },
     { "type": "quote", "lines": ["One image that tells you", "what you’re", "about to hear."] },
@@ -68,7 +68,7 @@
       "type": "credits",
       "items": [
         { "key": "Clients", "value": "Marvel · Image Comics · IBM · Microsoft · Prospect" },
-        { "key": "Role", "value": "Illustration, 3D, art direction" },
+        { "key": "Role", "value": "Illustration & art direction" },
         { "key": "Medium", "value": "Ink · digital · vector" }
       ]
     },
