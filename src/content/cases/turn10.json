@@ -5,31 +5,54 @@
   "accent": "#c6f23c",
   "blocks": [
     {
-      "type": "hero",
-      "eyebrowLeft": "Turn 10 Studios",
-      "eyebrowRight": "Studio websites",
-      "spine": "Michael Rea · Selected work",
-      "headline": ["Speed.", "Precision.", "Obsession."],
-      "accentLine": 2,
       "subhead": "Turn 10 engineer racing games to a standard that borders on the obsessive, and their studio site deserved the same care. This is the team behind Forza, shown as themselves.",
+      "spine": "Michael Rea · Selected work",
       "meta": "Studio site & identity · Xbox Game Studios",
-      "index": "02 / 08"
+      "eyebrowLeft": "Turn 10 Studios",
+      "index": "02 / 08",
+      "eyebrowRight": "Studio websites",
+      "headline": [
+        "Speed.",
+        "Precision.",
+        "Obsession."
+      ],
+      "type": "hero",
+      "accentLine": 2
     },
-    { "type": "reel", "src": "/hold/turn10/hero.webm", "caption": "This is Turn 10." },
+    {
+      "type": "reel",
+      "src": "/hold/turn10/hero.webm",
+      "caption": "This is Turn 10."
+    },
     {
       "type": "facts",
       "items": [
-        { "key": "Client", "value": "Turn 10 · Xbox Game Studios" },
-        { "key": "Disciplines", "value": "Brand · 3D · Motion · Web" },
-        { "key": "Role", "value": "Creative direction" },
-        { "key": "Output", "value": "Identity & interactive site" }
+        {
+          "key": "Client",
+          "value": "Turn 10 · Xbox Game Studios"
+        },
+        {
+          "key": "Disciplines",
+          "value": "Brand · 3D · Motion · Web"
+        },
+        {
+          "key": "Role",
+          "value": "Creative direction"
+        },
+        {
+          "key": "Output",
+          "value": "Identity & interactive site"
+        }
       ]
     },
     {
       "type": "movement",
       "num": "01",
       "label": "The brief",
-      "heading": ["Built on the", "studio’s DNA."],
+      "heading": [
+        "Built on the",
+        "studio’s DNA."
+      ],
       "paragraphs": [
         "We started with a proper breakdown of the studio’s DNA. What drives them, what makes them distinct, and what sits behind all that machinery. The sketching kept returning to the same theme, the human touch behind their high-performance technology."
       ]
@@ -40,26 +63,60 @@
       "image": "/hold/turn10/01.webp",
       "text": "The visual system took its cues from motorsport design, race telemetry and the clean, no-nonsense look of technical schematics, grounded by a forward-leaning italic that keeps everything in motion."
     },
-    { "type": "quote", "lines": ["Yellow cutting through", "greyscale. Urgency,", "energy, motion."] },
-    { "type": "fullbleed", "image": "/hold/turn10/02.webp", "caption": "An interactive representation of the studio office." },
+    {
+      "type": "quote",
+      "lines": [
+        "Yellow cutting through",
+        "black. Urgency",
+        "",
+        "energy",
+        "motion."
+      ]
+    },
+    {
+      "type": "fullbleed",
+      "image": "/hold/turn10/02.webp",
+      "caption": "An interactive representation of the studio office."
+    },
     {
       "type": "movement",
       "num": "02",
       "label": "The idea",
-      "heading": ["The office,", "made interactive."],
+      "heading": [
+        "The office,",
+        "made interactive."
+      ],
       "paragraphs": [
         "Early on we settled on representing the studio in an interactive, dynamic way, an online version of their office that shows each discipline in its natural habitat. Initial sketches were made in Photoshop, then laid out for our 3D modeller.",
         "We tested building the model in WebGL, but the fidelity expected of a leader in 3D graphics meant outputting the animations as video, a library of looped sequences triggered by interaction.",
         "Click an area of the office and you’re given a flythrough and an animated lobby for each discipline. Every one needed its own content, right down to the sticky notes on the whiteboards."
       ]
     },
-    { "type": "gallery", "images": ["/hold/turn10/03.webp", "/hold/turn10/04.webp", "/hold/turn10/05.webp"] },
-    { "type": "statement", "lines": ["A studio shown", "through its", "people."], "accentLine": 2 },
+    {
+      "type": "gallery",
+      "images": [
+        "/hold/turn10/03.webp",
+        "/hold/turn10/04.webp",
+        "/hold/turn10/05.webp"
+      ]
+    },
+    {
+      "type": "statement",
+      "lines": [
+        "A studio shown",
+        "through its",
+        "people."
+      ],
+      "accentLine": 2
+    },
     {
       "type": "movement",
       "num": "03",
       "label": "The result",
-      "heading": ["Absolute focus,", "absolute control."],
+      "heading": [
+        "Absolute focus,",
+        "absolute control."
+      ],
       "paragraphs": [
         "From the isometric studio map to the high-impact timeline, every element was tuned to echo Turn 10’s philosophy of absolute focus and absolute control. The result is a studio presence that moves as quickly as the games it makes."
       ]
@@ -74,11 +131,25 @@
     {
       "type": "credits",
       "items": [
-        { "key": "Client", "value": "Turn 10 Studios · Xbox Game Studios" },
-        { "key": "Role", "value": "Brand identity, interactive direction, UX, content" },
-        { "key": "Disciplines", "value": "Brand · 3D · motion · web" }
+        {
+          "key": "Client",
+          "value": "Turn 10 Studios · Xbox Game Studios"
+        },
+        {
+          "key": "Role",
+          "value": "Brand identity, interactive direction, UX, content"
+        },
+        {
+          "key": "Disciplines",
+          "value": "Brand · 3D · motion · web"
+        }
       ]
     },
-    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "02 / 08" }
+    {
+      "type": "index",
+      "label": "More work",
+      "url": "michaelreadesign.com",
+      "index": "02 / 08"
+    }
   ]
 }
