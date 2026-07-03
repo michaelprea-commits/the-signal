@@ -1,0 +1,6 @@
+# Single-page app: every route (case studies, /hold, /signal, /admin excluded
+# since it's a real static file) falls back to index.html so React Router can
+# take over client-side. Without this, direct links / refreshes on /work/<slug>
+# 404 on Netlify's static file server.
+/admin/*  /admin/index.html  200
+/*        /index.html        200
