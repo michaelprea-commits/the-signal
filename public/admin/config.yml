@@ -117,6 +117,7 @@ collections:
                 fields:
                   - { label: "Image or video file", name: image, widget: file }
                   - { label: "Caption", name: caption, widget: string, required: false }
+                  - { label: "Frame", name: frame, widget: select, options: [{ label: "Full-bleed (default)", value: "full" }, { label: "Square", value: "square" }], required: false }
               - label: "Pull quote"
                 name: quote
                 fields:

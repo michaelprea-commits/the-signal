@@ -95,7 +95,7 @@ function Split({ b }) {
 
 function FullBleed({ b }) {
   return (
-    <figure className="fullbleed">
+    <figure className={`fullbleed ${b.frame === 'square' ? 'fullbleed--square' : ''}`}>
       <Parallax src={b.image} />
       {b.caption && <figcaption><Eyebrow tick data-reveal="fade">{b.caption}</Eyebrow></figcaption>}
     </figure>

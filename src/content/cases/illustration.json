@@ -51,7 +51,7 @@
       ]
     },
     { "type": "statement", "lines": ["Twenty years of", "visual", "storytelling."], "accentLine": 2 },
-    { "type": "fullbleed", "image": "/hold/illustration/03.webp", "caption": "Editorial portraiture for Prospect Magazine." },
+    { "type": "fullbleed", "image": "/hold/illustration/03.webp", "frame": "square", "caption": "Does_Not_Compute, record cover." },
     {
       "type": "movement",
       "num": "03",

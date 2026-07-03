@@ -145,6 +145,8 @@ html.lenis, html.lenis body { height: auto; }
 .fullbleed { position: relative; width: 100vw; left: 50%; transform: translateX(-50%); height: 88vh; margin: var(--section) 0; }
 .fullbleed .parallax-img { position: absolute; inset: 0; }
 .fullbleed figcaption { position: absolute; left: var(--gut); bottom: 1.8rem; z-index: 2; }
+.fullbleed--square { width: min(76vw, 82vh); height: auto; aspect-ratio: 1 / 1; left: 50%; }
+.fullbleed--square figcaption { left: 0; bottom: -2.4rem; }
 
 /* ─ pull-quote (grid-aligned to the body column; lime mark hangs into the gutter) ─ */
 .quote { display: grid; grid-template-columns: repeat(12, 1fr); max-width: 1320px; margin: 0 auto; padding: clamp(5rem, 11vh, 9rem) var(--gut); }
@@ -195,6 +197,7 @@ html.lenis, html.lenis body { height: auto; }
   .movement__body { margin-top: 1.6rem; }
   .split__media { height: 52vh; }
   .fullbleed { height: 60vh; }
+  .fullbleed--square { width: 92vw; height: auto; aspect-ratio: 1 / 1; }
   .reel { height: 54vh; }
   .next-case { min-height: 58vh; }
 }
