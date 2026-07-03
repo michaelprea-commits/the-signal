@@ -1,18 +1,18 @@
 {
   "slug": "battle-road",
   "title": "Battle Road",
-  "cls": "Brand & web",
+  "cls": "Brand & identity",
   "accent": "#c6f23c",
   "blocks": [
     {
       "type": "hero",
       "eyebrowLeft": "Battle Road",
-      "eyebrowRight": "Brand & web",
+      "eyebrowRight": "Brand & identity",
       "spine": "Michael Rea · Selected work",
       "headline": ["Endurance.", "Resilience.", "Propulsion."],
       "accentLine": 2,
-      "subhead": "Battle Road came together the honest way, through cheerful and relentless iteration, each pass keeping only the bits that worked.",
-      "meta": "Brand identity & website",
+      "subhead": "A ground-up identity for Battle Road, built from the name outward, through mind-mapping, dozens of logo directions and a mark that had to work as well on a trade-show stand as it does on a business card.",
+      "meta": "Brand identity & guidelines",
       "index": "07 / 08"
     },
     { "type": "reel", "src": "/hold/battle-road/hero.webm", "caption": "Battle Road, in motion." },
@@ -20,9 +20,9 @@
       "type": "facts",
       "items": [
         { "key": "Client", "value": "Battle Road" },
-        { "key": "Disciplines", "value": "Brand · 3D · Web · Motion" },
+        { "key": "Disciplines", "value": "Brand · 3D · Guidelines" },
         { "key": "Role", "value": "Design & art direction" },
-        { "key": "Output", "value": "Identity & website" }
+        { "key": "Output", "value": "Identity & brand guidelines" }
       ]
     },
     {
@@ -31,7 +31,7 @@
       "label": "The brief",
       "heading": ["Distilled through", "iteration."],
       "paragraphs": [
-        "Some ideas arrive fully formed. This one was earned, refined step by step until the core of it felt inevitable."
+        "Battle Road needed an identity from nothing, a name with no visual language attached yet. Rather than jump to a mark, the process started with the name itself: what does \"Battle\" suggest, what does \"Road\" suggest, and where do the two overlap."
       ]
     },
     {
@@ -40,18 +40,18 @@
       "label": "The idea",
       "heading": ["Endurance,", "mapped."],
       "paragraphs": [
-        "Early explorations circled endurance, resilience and a pioneering spirit drawn from the founders themselves. I worked through a range of directions before settling on the peregrine falcon, native to the company’s Boston headquarters and a rather good icon for an adventurous, fast-moving team.",
-        "Topographic lines felt like a natural fit too, suggesting aerial landscapes while nodding to the digital and the scientific."
+        "The mind map split into four territories. \"Battle\" pulled toward soldiers, muskets, sabres and cannon. \"Road\" pulled toward aerial perspective, winding lines and streetlights. Where they met sat two more: simulation (worlds, nodes, grids, massive crowds) and digital (pixels, LEDs, glitch). Dozens of logo directions followed, a horse and rider, a lightning-struck flag, wordmark-only treatments, a bullet-holed license plate, before the peregrine falcon won out. It carries speed, precision and an aerial vantage point that ties the whole map back together.",
+        "Topographic contour lines became the identity's second signature, used across the brand book, business cards, banners and environmental graphics. They read as terrain and elevation, aerial and tactical at once, which is exactly the register the mark needed to hold."
       ]
     },
     {
       "type": "split",
       "side": "right",
       "image": "/hold/battle-road/02.webp",
-      "text": "The final mark captures a sense of propulsion, streamlined and inspired by navigational glyphs and the sharp geometry of flight paths. It suggests movement and clarity, balancing the raw with the precise."
+      "text": "The final lockup, falcon logomark beside a tall condensed wordmark, built to sit cleanly above the topographic linework used throughout the rest of the system."
     },
     { "type": "quote", "lines": ["A mark built for", "movement, clarity,", "propulsion."] },
-    { "type": "fullbleed", "image": "/hold/battle-road/03.webp", "caption": "Topographic 3D landscapes of the Boston area, built in Blender." },
+    { "type": "fullbleed", "image": "/hold/battle-road/06.webp", "caption": "Topographic 3D terrain, rendered as the brand book's opening scene." },
     { "type": "statement", "lines": ["An identity built", "through", "iteration."], "accentLine": 2 },
     {
       "type": "movement",
@@ -59,18 +59,17 @@
       "label": "The result",
       "heading": ["Engineered", "for speed."],
       "paragraphs": [
-        "The brand was designed for flexibility, as comfortable on a huge wall as it is in your hand on a business card. With a mix of 3D renders and vector linework, the client had enough to build on for years.",
-        "The website followed the same philosophy. Wireframes began intentionally brutalist, all harsh contrast and sharp angles, then resolved into something calmer, with clean grids, strong typography and measured negative space.",
-        "Motion mattered throughout. Menus slide, hovers reward a wandering cursor, transitions feel deliberate. The experience mirrors the identity, engineered, structured and built for speed."
+        "The finished system was built for flexibility from the start, the same falcon and contour-line language carrying across business cards, roll-up banners, apparel and a full-scale wall installation, all built around the tagline \"Create Your Own Journey.\"",
+        "Battle Road's work has since evolved into AtomEngine, a real-time simulation platform used for defence, infrastructure and training. The falcon's aerial vantage and the topographic linework, chosen for entirely different reasons at the time, turned out to describe that direction rather well."
       ]
     },
-    { "type": "gallery", "images": ["/hold/battle-road/04.webp", "/hold/battle-road/05.webp", "/hold/battle-road/06.webp"] },
+    { "type": "gallery", "images": ["/hold/battle-road/03.webp", "/hold/battle-road/04.webp", "/hold/battle-road/05.webp"] },
     {
       "type": "credits",
       "items": [
         { "key": "Client", "value": "Battle Road" },
-        { "key": "Role", "value": "Brand identity, 3D, web design, motion" },
-        { "key": "Disciplines", "value": "Brand · 3D · web · motion" }
+        { "key": "Role", "value": "Brand identity, logo, guidelines, 3D" },
+        { "key": "Disciplines", "value": "Brand · identity · 3D" }
       ]
     },
     { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "07 / 08" }
