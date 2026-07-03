@@ -30,11 +30,13 @@ list.forEach((proj, k) => {
     }
   }
   const nxt = list[(k + 1) % list.length]
-  const media = nxt.blocks.find((b) => b.type === 'fullbleed') || nxt.blocks.find((b) => b.type === 'split')
+  const isVideo = (src) => /\.(webm|mp4|mov)$/i.test(src || '')
+  const media = [...nxt.blocks].find((b) => (b.type === 'fullbleed' || b.type === 'split') && !isVideo(b.image))
   const reel = nxt.blocks.find((b) => b.type === 'reel')
+    || nxt.blocks.find((b) => b.type === 'fullbleed' && isVideo(b.image))
   proj.blocks.push({
     type: 'next', title: nxt.title, cls: nxt.cls, href: `/work/${nxt.slug}`,
-    image: media ? media.image : '', video: !media && reel ? reel.src : '',
+    image: media ? media.image : '', video: !media && reel ? (reel.src || reel.image) : '',
   })
 })
 
