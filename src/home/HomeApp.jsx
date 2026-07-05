@@ -48,6 +48,7 @@ export default function HomeApp() {
   const aBlurb = useRef(null)
   const aMore = useRef(null)
   const idx = useRef(-1)
+  const revealTimer = useRef(null)
   const root = useRef(null)
   const loader = useRef(null)
   const lNum = useRef(null)
@@ -151,7 +152,12 @@ export default function HomeApp() {
       const i = homeState.active
       if (i !== idx.current && panels[i]) {
         idx.current = i
-        reveal(i)
+        // the ring keeps rotating for a beat after `active` flips (it's damped,
+        // not snapped), so hold the copy reveal until the screen has actually
+        // caught up — otherwise the text finishes wiping in before its panel
+        // has arrived front-and-centre.
+        if (revealTimer.current) clearTimeout(revealTimer.current)
+        revealTimer.current = setTimeout(() => reveal(i), 420)
       }
       raf = requestAnimationFrame(loop)
     }
@@ -161,6 +167,7 @@ export default function HomeApp() {
       window.removeEventListener('scroll', onScroll)
       cancelAnimationFrame(raf)
       if (tl) tl.kill()
+      if (revealTimer.current) clearTimeout(revealTimer.current)
     }
   }, [])
 
