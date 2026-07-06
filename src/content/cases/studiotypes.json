@@ -20,6 +20,7 @@
       "type": "facts",
       "items": [
         { "key": "Client", "value": "Studiotypes" },
+        { "key": "Agency", "value": "1minus1" },
         { "key": "Disciplines", "value": "Brand · Web · 3D · Motion" },
         { "key": "Role", "value": "Design & art direction" },
         { "key": "Output", "value": "Identity & website" }
@@ -67,6 +68,7 @@
       "type": "credits",
       "items": [
         { "key": "Client", "value": "Studiotypes" },
+        { "key": "Agency", "value": "1minus1" },
         { "key": "Role", "value": "Brand identity, web design, art direction" },
         { "key": "Disciplines", "value": "Brand · web · 3D · motion" }
       ]

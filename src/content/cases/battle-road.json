@@ -20,6 +20,7 @@
       "type": "facts",
       "items": [
         { "key": "Client", "value": "Battle Road" },
+        { "key": "Agency", "value": "1minus1" },
         { "key": "Disciplines", "value": "Brand · 3D · Guidelines" },
         { "key": "Role", "value": "Design & art direction" },
         { "key": "Output", "value": "Identity, guidelines & stand design" }
@@ -83,6 +84,7 @@
       "type": "credits",
       "items": [
         { "key": "Client", "value": "Battle Road" },
+        { "key": "Agency", "value": "1minus1 (identity) · freelance (ongoing)" },
         { "key": "Role", "value": "Brand identity, logo, guidelines, 3D" },
         { "key": "Disciplines", "value": "Brand · identity · 3D" }
       ]
