@@ -42,8 +42,8 @@ collections:
             name: intro
             widget: object
             fields:
-              - { label: "Name (2 lines)", name: name, widget: list, field: { label: "Line", widget: string } }
-              - { label: "Roles / credentials (3 lines)", name: roles, widget: list, field: { label: "Line", widget: string } }
+              - { label: "Name (2 lines)", name: name, widget: list, field: { label: "Line", name: line, widget: string } }
+              - { label: "Roles / credentials (3 lines)", name: roles, widget: list, field: { label: "Line", name: line, widget: string } }
           - label: "Panels (the 6 ring slots, in order)"
             name: panels
             widget: list
@@ -80,7 +80,7 @@ collections:
                   - { label: "Eyebrow left", name: eyebrowLeft, widget: string }
                   - { label: "Eyebrow right", name: eyebrowRight, widget: string }
                   - { label: "Spine (vertical side label)", name: spine, widget: string, required: false }
-                  - { label: "Headline (one line each)", name: headline, widget: list, field: { label: "Line", widget: string } }
+                  - { label: "Headline (one line each)", name: headline, widget: list, field: { label: "Line", name: line, widget: string } }
                   - { label: "Accent line (0-indexed)", name: accentLine, widget: number, value_type: int }
                   - { label: "Subhead", name: subhead, widget: text }
                   - { label: "Meta line", name: meta, widget: string }
@@ -104,8 +104,8 @@ collections:
                 fields:
                   - { label: "Number", name: num, widget: string, required: false }
                   - { label: "Label", name: label, widget: string }
-                  - { label: "Heading (one line each)", name: heading, widget: list, required: false, field: { label: "Line", widget: string } }
-                  - { label: "Paragraphs", name: paragraphs, widget: list, field: { label: "Paragraph", widget: text } }
+                  - { label: "Heading (one line each)", name: heading, widget: list, required: false, field: { label: "Line", name: line, widget: string } }
+                  - { label: "Paragraphs", name: paragraphs, widget: list, field: { label: "Paragraph", name: paragraph, widget: text } }
               - label: "Split (text + image)"
                 name: split
                 fields:
@@ -128,7 +128,7 @@ collections:
               - label: "Pull quote"
                 name: quote
                 fields:
-                  - { label: "Lines", name: lines, widget: list, field: { label: "Line", widget: string } }
+                  - { label: "Lines", name: lines, widget: list, field: { label: "Line", name: line, widget: string } }
               - label: "Testimonial (someone else's words — a quote, recommendation or public reaction)"
                 name: testimonial
                 fields:
@@ -139,7 +139,7 @@ collections:
               - label: "Statement (large centred line)"
                 name: statement
                 fields:
-                  - { label: "Lines", name: lines, widget: list, field: { label: "Line", widget: string } }
+                  - { label: "Lines", name: lines, widget: list, field: { label: "Line", name: line, widget: string } }
                   - { label: "Accent line (0-indexed)", name: accentLine, widget: number, value_type: int }
               - label: "Gallery (3 images)"
                 name: gallery
