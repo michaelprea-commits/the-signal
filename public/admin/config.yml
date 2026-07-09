@@ -44,7 +44,7 @@ collections:
             fields:
               - { label: "Name (2 lines)", name: name, widget: list, field: { label: "Line", name: line, widget: string } }
               - { label: "Roles / credentials (3 lines)", name: roles, widget: list, field: { label: "Line", name: line, widget: string } }
-          - label: "Panels (the 6 ring slots, in order)"
+          - label: "Panels (the 5 ring slots, in order)"
             name: panels
             widget: list
             summary: "{{fields.title}}"
@@ -168,23 +168,19 @@ collections:
         label: "03 — Studiotypes"
         file: "src/content/cases/studiotypes.json"
         fields: *case_fields
-      - name: "chaos-gate"
-        label: "04 — Chaos Gate"
-        file: "src/content/cases/chaos-gate.json"
-        fields: *case_fields
       - name: "illustration"
-        label: "05 — Illustration"
+        label: "04 — Illustration"
         file: "src/content/cases/illustration.json"
         fields: *case_fields
       - name: "animation"
-        label: "06 — Animation"
+        label: "05 — Animation"
         file: "src/content/cases/animation.json"
         fields: *case_fields
       - name: "battle-road"
-        label: "07 — Battle Road"
+        label: "06 — Battle Road"
         file: "src/content/cases/battle-road.json"
         fields: *case_fields
       - name: "hey-bird"
-        label: "08 — Hey Bird!"
+        label: "07 — Hey Bird!"
         file: "src/content/cases/hey-bird.json"
         fields: *case_fields

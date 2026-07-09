@@ -1,7 +1,6 @@
 import forza from '../content/cases/forza.json'
 import turn10 from '../content/cases/turn10.json'
 import studiotypes from '../content/cases/studiotypes.json'
-import chaosGate from '../content/cases/chaos-gate.json'
 import illustration from '../content/cases/illustration.json'
 import animation from '../content/cases/animation.json'
 import battleRoad from '../content/cases/battle-road.json'
@@ -9,8 +8,8 @@ import heyBird from '../content/cases/hey-bird.json'
 
 // Registry of all case studies. Content lives in src/content/cases/*.json
 // (editable via the Decap CMS at /admin). Order doubles as the archive order:
-// the six homepage headliners first, then the deeper cuts.
-const source = [forza, turn10, studiotypes, chaosGate, illustration, animation, battleRoad, heyBird]
+// the homepage headliners first, then the deeper cuts.
+const source = [forza, turn10, studiotypes, illustration, animation, battleRoad, heyBird]
 // shallow-clone each project + its blocks array so we never mutate the
 // imported JSON module (Vite caches it; mutating in place would compound
 // across HMR reloads)

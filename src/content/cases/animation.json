@@ -13,7 +13,7 @@
       "accentLine": 2,
       "subhead": "Five years building digital experiences for gaming’s biggest names, with motion at the centre. Motion graphics, 3D and WebGL that look good and run smoothly where it counts.",
       "meta": "Motion graphics · 3D · WebGL",
-      "index": "06 / 08"
+      "index": "05 / 07"
     },
     { "type": "reel", "src": "/hold/animation/hero.webm", "caption": "Showreel." },
     {
@@ -84,6 +84,6 @@
         { "key": "Disciplines", "value": "Motion · 3D · WebGL" }
       ]
     },
-    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "06 / 08" }
+    { "type": "index", "label": "More work", "url": "michaelreadesign.com", "index": "05 / 07" }
   ]
 }
