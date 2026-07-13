@@ -16,12 +16,25 @@ function DisplayLine({ children, className = '' }) {
   return <span className="d-line"><span className={`d-line__i ${className}`}>{children}</span></span>
 }
 
+// iOS Safari can't reliably decode WebM/VP9, so every webm pairs with an
+// H.264 mp4 twin (same path, .mp4 extension) and the browser picks the
+// first source it can actually play. Non-webm srcs pass through untouched.
+function VideoEl({ src, ...rest }) {
+  if (!/\.webm$/i.test(src)) return <video src={src} {...rest} />
+  return (
+    <video {...rest}>
+      <source src={src} type="video/webm" />
+      <source src={src.replace(/\.webm$/i, '.mp4')} type="video/mp4" />
+    </video>
+  )
+}
+
 function Parallax({ src, className = '' }) {
   const isVideo = /\.(webm|mp4)$/i.test(src)
   return (
     <div className={`parallax-img ${className}`} data-parallax>
       {isVideo
-        ? <video src={src} muted loop autoPlay playsInline preload="metadata" />
+        ? <VideoEl src={src} muted loop autoPlay playsInline preload="metadata" />
         : <img src={src} alt="" loading="lazy" />}
     </div>
   )
@@ -127,7 +140,7 @@ function Reel({ b }) {
   return (
     <figure className="reel">
       <div className="parallax-img" data-parallax>
-        <video src={b.src} muted loop autoPlay playsInline preload="metadata" />
+        <VideoEl src={b.src} muted loop autoPlay playsInline preload="metadata" />
       </div>
       {b.caption && <figcaption><Eyebrow tick data-reveal="fade">{b.caption}</Eyebrow></figcaption>}
     </figure>
@@ -151,7 +164,7 @@ function NextCase({ b }) {
     <a className="next-case" href={b.href}>
       <div className="next-case__media">
         {b.image && <img src={b.image} alt="" loading="lazy" />}
-        {!b.image && b.video && <video src={b.video} muted loop autoPlay playsInline preload="metadata" />}
+        {!b.image && b.video && <VideoEl src={b.video} muted loop autoPlay playsInline preload="metadata" />}
       </div>
       <Eyebrow tick accent data-reveal="fade">Next</Eyebrow>
       <span className="next-case__title" data-reveal="fade">{b.title}</span>

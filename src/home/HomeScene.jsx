@@ -25,6 +25,13 @@ const HOOP_ROLL = -0.05  // subtle anticlockwise roll about the view axis
 
 function prep(tex) { tex.colorSpace = THREE.SRGBColorSpace; return tex }
 
+// iOS Safari can't reliably decode WebM/VP9. useVideoTexture takes a single
+// URL, so pick per-browser: if the browser won't promise webm playback, swap
+// in the H.264 mp4 twin (same path, .mp4 — encoded alongside every webm).
+const WEBM_OK = typeof document === 'undefined'
+  || document.createElement('video').canPlayType('video/webm; codecs="vp9"') !== ''
+const vidSrc = (src) => (WEBM_OK || !/\.webm$/i.test(src) ? src : src.replace(/\.webm$/i, '.mp4'))
+
 // One screen: a dark frame (double-sided — its outer face borders the video, its
 // inner face is the black reverse seen on the far wall) + the video on the
 // outer/convex face, sitting slightly proud for a curved-TV thickness.
@@ -44,7 +51,7 @@ function ScreenMesh({ tex, matRef }) {
 }
 
 function ImageScreen({ src, matRef }) { const tex = useTexture(src); useMemo(() => prep(tex), [tex]); return <ScreenMesh tex={tex} matRef={matRef} /> }
-function VideoScreen({ src, matRef }) { const tex = useVideoTexture(src, { muted: true, loop: true, start: true, playsInline: true, crossOrigin: 'anonymous' }); useMemo(() => prep(tex), [tex]); return <ScreenMesh tex={tex} matRef={matRef} /> }
+function VideoScreen({ src, matRef }) { const tex = useVideoTexture(vidSrc(src), { muted: true, loop: true, start: true, playsInline: true, crossOrigin: 'anonymous' }); useMemo(() => prep(tex), [tex]); return <ScreenMesh tex={tex} matRef={matRef} /> }
 
 export function HomeScene() {
   const { camera } = useThree()
