@@ -36,8 +36,11 @@
 .home-loader::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.09; mix-blend-mode: soft-light; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px 200px; }
 .home-loader__head, .home-loader__foot { display: flex; justify-content: space-between; gap: 2rem; }
 .home-loader__head span, .home-loader__foot span { font-family: var(--mono); font-weight: 400; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.62rem; color: var(--dim); }
-.home-loader__count { overflow: hidden; align-self: flex-start; margin-top: auto; padding: 0.18em 0.05em 0.08em; margin-bottom: -0.08em; }
-.home-loader__count span { display: block; font-family: 'Bueno', sans-serif; font-weight: 700; line-height: 0.8; letter-spacing: -0.015em; font-size: clamp(6rem, 20vw, 17rem); color: var(--ink); font-variant-numeric: tabular-nums; }
+/* the count's font-size lives on the MASK so the em padding (glyph-overshoot
+   headroom) scales with the digits — on the span it'd resolve against the
+   inherited 16px and shave the tops off at display sizes */
+.home-loader__count { overflow: hidden; align-self: flex-start; margin-top: auto; font-size: clamp(6rem, 20vw, 17rem); padding: 0.22em 0.04em 0.05em; margin-bottom: -0.05em; }
+.home-loader__count span { display: block; font-family: 'Bueno', sans-serif; font-weight: 700; line-height: 0.8; letter-spacing: -0.015em; font-size: 1em; color: var(--ink); font-variant-numeric: tabular-nums; }
 .home-loader__bar { height: 1px; background: var(--line); margin: 2.2rem 0 1.6rem; }
 .home-loader__bar i { display: block; height: 100%; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; }
 /* keep the video-texture <video> elements out of the DOM view (no stray controls) */
@@ -61,8 +64,11 @@
 @keyframes status-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.72); } }
 
 .home-hero { position: absolute; top: 4vh; left: var(--gut); will-change: opacity, transform; }
-.home-hero__line { overflow: hidden; padding: 0.32em 0.08em 0.24em; margin: -0.32em -0.08em -0.2em; }
-.home-hero h1 { font-family: 'Bueno', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.015em; line-height: 0.82; font-size: clamp(3.4rem, 13vw, 13rem); color: var(--ink); transform: translateY(108%); }
+/* font-size sits on the MASK so its em padding scales with the type — round
+   glyphs (the C) overshoot the flat cap line and need real headroom. Bottom
+   allowance stays small so the pre-reveal h1 (parked 108% down) never peeks. */
+.home-hero__line { overflow: hidden; font-size: clamp(3.4rem, 13vw, 13rem); padding: 0.24em 0.06em 0.04em; margin: -0.24em -0.06em -0.04em; }
+.home-hero h1 { font-family: 'Bueno', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.015em; line-height: 0.82; font-size: 1em; color: var(--ink); transform: translateY(108%); }
 .home.is-live .home-hero h1 { animation: home-line-up 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
 @keyframes home-line-up { from { transform: translateY(108%); } to { transform: translateY(0); } }
 .home-hero__roles { margin-top: 1.7rem; }
@@ -100,7 +106,7 @@
 }
 
 @media (max-width: 600px) {
-  .home-hero h1 { font-size: clamp(2.8rem, 17vw, 6rem); }
+  .home-hero__line { font-size: clamp(2.8rem, 17vw, 6rem); }
   /* stack the bottom zone: lockup lives above the CTA, nothing overlaps */
   .home-active { bottom: 13vh; max-width: 88vw; }
   .home-active__name { font-size: clamp(1.9rem, 9vw, 2.6rem); }
