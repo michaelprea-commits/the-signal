@@ -110,7 +110,10 @@ export default function HomeApp() {
       if (lNum.current) lNum.current.textContent = '100'
       if (lBar.current) lBar.current.style.transform = 'scaleX(1)'
       const etl = gsap.timeline()
-      etl.to(lNum.current, { yPercent: 110, duration: 0.55, ease: 'expo.in' }, 0.12)
+      // 130%: the mask window is taller than the span (glyph-overshoot headroom)
+      // and digit ink pokes ~0.07 of the span height above its box, so 110%
+      // left the crowns peeking — full clearance needs ≥113%, 130 adds margin
+      etl.to(lNum.current, { yPercent: 130, duration: 0.55, ease: 'expo.in' }, 0.12)
       etl.to('.home-loader__head, .home-loader__foot, .home-loader__bar', { opacity: 0, duration: 0.35 }, 0.2)
       etl.add(goLive, 0.62)
       etl.to(loader.current, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.9, ease: 'expo.inOut' }, 0.66)
